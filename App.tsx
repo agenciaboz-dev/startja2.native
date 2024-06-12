@@ -38,7 +38,7 @@ export default function App() {
             <Providers>
                 <StatusBar animated translucent style={"dark"} />
                 <Routes />
-                {/* <NotificationsHandler /> */}
+                <NotificationsHandler />
             </Providers>
         </View>
     )

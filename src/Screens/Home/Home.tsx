@@ -10,6 +10,7 @@ import { DistributionStores } from "../../components/DistributionStores"
 import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { default_navigator_options } from "../../tools/default_navigator_options"
 import { BudgetRequestComponent } from "./BudgetRequestComponent"
+import { BudgetSuccess } from "./BudgetSuccess"
 
 interface HomeProps {}
 
@@ -39,6 +40,7 @@ const HomeStack: React.FC = () => (
     <Stack.Navigator screenOptions={default_navigator_options} initialRouteName="login">
         <Stack.Screen name="login" component={HomeComponent} />
         <Stack.Screen name="budget" component={BudgetRequestComponent} />
+        <Stack.Screen name="budgetSuccess" component={BudgetSuccess} />
     </Stack.Navigator>
 )
 

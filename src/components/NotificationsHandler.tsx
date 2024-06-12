@@ -96,9 +96,11 @@ export const NotificationsHandler: React.FC<NotificationsHandlerProps> = ({}) =>
     }
 
     useEffect(() => {
-        registerForPushNotificationsAsync()
-            .then((token) => setExpoPushToken(token ?? ""))
-            .catch((error: any) => setExpoPushToken(`${error}`))
+        if (Platform.OS != "web") {
+            registerForPushNotificationsAsync()
+                .then((token) => setExpoPushToken(token ?? ""))
+                .catch((error: any) => setExpoPushToken(`${error}`))
+        }
 
         notificationListener.current = Notifications.addNotificationReceivedListener((data) => {
             console.log(JSON.stringify(data, null, 4))
