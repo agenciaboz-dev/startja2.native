@@ -40,7 +40,16 @@ export const DistributionStores: React.FC<DistributionStoresProps> = ({}) => {
     const theme = useTheme()
 
     return (
-        <View style={{ alignItems: "center", padding: 10, backgroundColor: "#F2F3F5", borderRadius: 5, gap: 10, alignSelf: "center" }}>
+        <View
+            style={{
+                alignItems: "center",
+                padding: 10,
+                backgroundColor: "#F2F3F5",
+                borderRadius: 5,
+                gap: 10,
+                alignSelf: "center",
+            }}
+        >
             <Text>Obtenha o aplicativo</Text>
             <View style={{ flexDirection: "row", gap: 20 }}>
                 <ItemContainer apple />
