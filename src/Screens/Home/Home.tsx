@@ -7,6 +7,9 @@ import { LoginComponent } from "./LoginComponent"
 import { colors } from "../../style/colors"
 import { LinksComponent } from "./LinksComponent"
 import { DistributionStores } from "../../components/DistributionStores"
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import { default_navigator_options } from "../../tools/default_navigator_options"
+import { BudgetRequestComponent } from "./BudgetRequestComponent"
 
 interface HomeProps {}
 
@@ -22,14 +25,29 @@ const LogoComponent = () => (
     </View>
 )
 
+const Stack = createNativeStackNavigator()
+
+const HomeComponent: React.FC = () => (
+    <>
+        <LoginComponent />
+        <LinksComponent />
+        {Platform.OS == "web" && <DistributionStores />}
+    </>
+)
+
+const HomeStack: React.FC = () => (
+    <Stack.Navigator screenOptions={default_navigator_options} initialRouteName="login">
+        <Stack.Screen name="login" component={HomeComponent} />
+        <Stack.Screen name="budget" component={BudgetRequestComponent} />
+    </Stack.Navigator>
+)
+
 export const Home: React.FC<HomeProps> = ({}) => {
     return Platform.OS == "web" ? (
         <View style={{ flex: 1, flexDirection: "row" }}>
             <View style={{ flex: 0.4, padding: 50, gap: 20, paddingHorizontal: 150 }}>
                 <LogoComponent />
-                <LoginComponent />
-                <LinksComponent />
-                <DistributionStores />
+                <HomeStack />
             </View>
             <Image source={require("../../../assets/login_background.png")} style={{ flex: 1 }} />
         </View>
@@ -40,8 +58,8 @@ export const Home: React.FC<HomeProps> = ({}) => {
             keyboardShouldPersistTaps="handled"
         >
             <LogoComponent />
-            <LoginComponent />
-            <LinksComponent />
+            <HomeStack />
         </ScrollView>
     )
 }
+
