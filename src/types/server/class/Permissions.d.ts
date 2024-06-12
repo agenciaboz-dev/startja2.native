@@ -1,18 +1,54 @@
 import { Prisma } from "@prisma/client";
-import { WithoutFunctions } from "./helpers";
-export type PermissionsPrisma = Prisma.PermissionsGetPayload<{}>;
-export type PermissionsForm = Omit<WithoutFunctions<Permissions>, "id">;
-export type PartialPermissions = Partial<Permissions> & {
-    id: string;
+export declare const customer_permissions_include: {
+    nfePermissions: true;
 };
-export declare class Permissions {
+type CustomerPermissionsPrisma = Prisma.CustomerPermissionsGetPayload<{
+    include: typeof customer_permissions_include;
+}>;
+type NfePermissionsPrisma = Prisma.NfePermissionsGetPayload<{}>;
+type ResalePermissionsPrisma = Prisma.ResalePermissionsGetPayload<{}>;
+export declare class ResalePermissions {
     id: number;
-    role_id: number | null;
-    panelTab: boolean;
-    creatorTab: boolean;
-    searchTab: boolean;
-    favoritesTab: boolean;
-    configTab: boolean;
-    static createDefault(): Promise<Permissions>;
-    constructor(data: PermissionsPrisma);
+    customers: number;
+    products: number;
+    natures: number;
+    editPermissions: boolean;
+    inviteUser: boolean;
+    constructor(data: ResalePermissionsPrisma);
 }
+export declare class NfePermissions {
+    id: number;
+    emit: boolean;
+    edit: boolean;
+    cancel: boolean;
+    delete: boolean;
+    transmit: boolean;
+    clone: boolean;
+    adjust: boolean;
+    renderNumber: boolean;
+    manifest: boolean;
+    correctionLetter: boolean;
+    share: boolean;
+    download: boolean;
+    history: boolean;
+    save_view: boolean;
+    constructor(data: NfePermissionsPrisma);
+}
+export declare class CustomerPermissions {
+    id: number;
+    enterprises: number;
+    products: number;
+    natures: number;
+    properties: number;
+    bank_accounts: number;
+    edit_permissions: boolean;
+    invite_user: boolean;
+    options: boolean;
+    report_nfe: number;
+    sold_products: number;
+    chart_accounts: number;
+    nfePermissionsId: number;
+    nfePermissions: NfePermissions;
+    constructor(data: CustomerPermissionsPrisma);
+}
+export {};

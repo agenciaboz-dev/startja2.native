@@ -1,5 +1,5 @@
 import React, { FocusEvent } from "react"
-import { Text, TextInput, TextInputProps } from "react-native-paper"
+import { Text, TextInput, TextInputProps, useTheme } from "react-native-paper"
 import { DimensionValue, TextInput as OriginalInput, View } from "react-native"
 import { colors } from "../style/colors"
 import { FormikErrors, FormikTouched } from "formik"
@@ -26,6 +26,7 @@ export interface FormTextProps extends TextInputProps {
 }
 
 export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>, FormTextProps>((props, ref) => {
+    const theme = useTheme()
     const error = !!(props.formik.touched[props.name] && props.formik.errors[props.name])
     const error_text = props.formik.errors[props.name] as string
     return (
@@ -37,12 +38,13 @@ export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>,
                     <TextInput
                         ref={ref}
                         {...props}
+                        right={props.right ? error ? <TextInput.Icon icon={"alert-circle"} color={theme.colors.error} /> : props.right : undefined}
                         label={undefined}
                         mode="outlined"
                         style={[{ backgroundColor: "transparent", flexShrink: 0 }, props.multiline && { paddingVertical: 10 }, props.style]}
                         outlineStyle={{
-                            borderRadius: 10,
-                            borderColor: error ? colors.error : undefined,
+                            borderRadius: 5,
+                            borderColor: error ? theme.colors.error : undefined,
                         }}
                         dense
                         returnKeyType={props.returnKeyType || "next"}
@@ -63,7 +65,7 @@ export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>,
                 }
             />
 
-            {error && <Text style={{ color: colors.error }}>{error_text}</Text>}
+            {error && error_text != " " && <Text style={{ color: theme.colors.error }}>{error_text}</Text>}
         </View>
     )
 })

@@ -7,12 +7,22 @@ interface LabeledComponentProps {
     label: TextInputLabelProp
     Component: React.ReactNode
     marginBottom?: number
+    orientation?: "vertical" | "horizontal"
+    reverse?: boolean
 }
 
-export const LabeledComponent: React.FC<LabeledComponentProps> = ({ label, Component, marginBottom }) => {
+export const LabeledComponent: React.FC<LabeledComponentProps> = ({ label, Component, marginBottom, orientation = "vertical", reverse }) => {
     return (
-        <View style={{ flex: 1 }}>
-            <Text variant="bodySmall" style={{ marginLeft: 5, marginBottom }}>
+        <View
+            style={[
+                orientation == "horizontal" && { flexDirection: "row", alignItems: "center" },
+                reverse && {
+                    flexDirection: orientation == "horizontal" ? "row-reverse" : "column-reverse",
+                    justifyContent: "flex-start",
+                },
+            ]}
+        >
+            <Text variant="bodySmall" style={[{ marginLeft: 5, marginBottom }]}>
                 {label}
             </Text>
             {Component}

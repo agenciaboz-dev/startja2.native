@@ -9,12 +9,6 @@ interface LogoProps {
     contentFit?: "contain" | "cover" | "fill"
 }
 
-export const Logo: React.FC<LogoProps> = ({ size = 200, tintColor = "white", style, contentFit }) => {
-    return (
-        <Image
-            source={require("../../assets/logo.webp")}
-            style={[{ width: size, height: size, tintColor: tintColor }, style]}
-            contentFit={contentFit}
-        />
-    )
+export const Logo: React.FC<LogoProps> = ({ size = 200, style, contentFit = "contain" }) => {
+    return <Image source={require("../../assets/logo.webp")} style={[{ height: size, width: (993 * size) / 369 }, style]} contentFit={contentFit} />
 }
