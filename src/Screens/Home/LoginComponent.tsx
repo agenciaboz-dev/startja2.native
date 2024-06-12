@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Platform, TextInput, View } from "react-native"
 import { Button, Checkbox, TextInput as Input, Text, useTheme } from "react-native-paper"
 import { useFormik } from "formik"
@@ -9,6 +9,7 @@ import { colors } from "../../style/colors"
 import { api } from "../../backend/api"
 import * as Yup from "yup"
 import { validationErrors } from "../../tools/validationErrors"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 interface LoginComponentProps {}
 
@@ -18,6 +19,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
 
     const [loading, setLoading] = useState(false)
     const [hiddenPassword, setHiddenPassword] = useState(true)
+    const [keepConnected, setKeepConnected] = useState(false)
 
     const validation_schema = Yup.object().shape({
         login: Yup.string().email("E-mail inválido").required(validationErrors.required),
@@ -48,6 +50,23 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
         validationSchema: validation_schema,
         validateOnChange: false,
     })
+
+    const fetchKeepConnected = async () => {
+        const value = await AsyncStorage.getItem("keepConnected")
+        if (value) {
+            setKeepConnected(JSON.parse(value))
+        }
+    }
+
+    const handleKeepConnectedChange = async () => {
+        const value = !keepConnected
+        setKeepConnected(value)
+        await AsyncStorage.setItem("keepConnected", JSON.stringify(value))
+    }
+
+    useEffect(() => {
+        fetchKeepConnected()
+    }, [])
 
     return (
         <View style={[{ gap: 20, borderTopColor: theme.colors.outlineVariant, borderTopWidth: 1 }, Platform.OS != "web" && { gap: 10 }]}>
@@ -87,7 +106,13 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
                 <Button mode="contained" onPress={() => formik.handleSubmit()} loading={loading}>
                     Entrar
                 </Button>
-                <LabeledComponent Component={<Checkbox status="checked" />} label={"Manter conectado"} orientation="horizontal" reverse />
+                <LabeledComponent
+                    Component={<Checkbox status={keepConnected ? "checked" : "unchecked"} onPress={(e) => handleKeepConnectedChange()} />}
+                    label={"Manter conectado"}
+                    orientation="horizontal"
+                    reverse
+                    style={{ marginLeft: -8 }}
+                />
             </View>
         </View>
     )

@@ -1,5 +1,5 @@
 import React from "react"
-import { View } from "react-native"
+import { View, ViewStyle } from "react-native"
 import { Text } from "react-native-paper"
 import { TextInputLabelProp } from "react-native-paper/lib/typescript/components/TextInput/types"
 
@@ -9,9 +9,10 @@ interface LabeledComponentProps {
     marginBottom?: number
     orientation?: "vertical" | "horizontal"
     reverse?: boolean
+    style?: ViewStyle
 }
 
-export const LabeledComponent: React.FC<LabeledComponentProps> = ({ label, Component, marginBottom, orientation = "vertical", reverse }) => {
+export const LabeledComponent: React.FC<LabeledComponentProps> = ({ label, Component, marginBottom, orientation = "vertical", reverse, style }) => {
     return (
         <View
             style={[
@@ -20,6 +21,7 @@ export const LabeledComponent: React.FC<LabeledComponentProps> = ({ label, Compo
                     flexDirection: orientation == "horizontal" ? "row-reverse" : "column-reverse",
                     justifyContent: "flex-start",
                 },
+                style,
             ]}
         >
             <Text variant="bodySmall" style={[{ marginLeft: 5, marginBottom }]}>
