@@ -15,9 +15,9 @@ const ItemContainer: React.FC<{ apple?: boolean }> = ({ apple }) => {
                 borderRadius: 5,
                 backgroundColor: "#000",
                 flexDirection: "row",
-                padding: 5,
                 alignItems: "center",
                 gap: 5,
+                padding: 2,
                 paddingHorizontal: 10,
             }}
         >
@@ -27,10 +27,8 @@ const ItemContainer: React.FC<{ apple?: boolean }> = ({ apple }) => {
                 contentFit="contain"
             />
             <View style={{ justifyContent: "center" }}>
-                <Text variant="labelSmall" style={{ color: "#fff" }}>
-                    {apple ? "Download on the" : "GET IT ON"}
-                </Text>
-                <Text style={{ color: "#fff" }} variant="titleLarge">
+                <Text style={{ color: "#fff", fontSize: 10 }}>{apple ? "Download on the" : "GET IT ON"}</Text>
+                <Text style={{ color: "#fff", fontSize: 15, lineHeight: 20 }} variant="titleLarge">
                     {apple ? "App Store" : "Google Play"}
                 </Text>
             </View>

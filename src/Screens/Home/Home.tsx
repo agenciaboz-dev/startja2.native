@@ -12,7 +12,7 @@ interface HomeProps {}
 
 const LogoComponent = () => (
     <View style={[{ gap: 20 }, Platform.OS != "web" && { alignItems: "center" }]}>
-        <Logo size={80} />
+        <Logo size={Platform.OS == "web" ? 50 : 80} />
         <View style={[{ flexDirection: "row" }]}>
             <Text variant={Platform.OS == "web" ? "displayMedium" : "titleMedium"} style={{}}>
                 Levando <Text style={{ color: colors.primary, fontWeight: "bold" }}>soluções</Text> ao empreendedor do{" "}
