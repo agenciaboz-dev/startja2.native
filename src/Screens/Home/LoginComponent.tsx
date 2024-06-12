@@ -10,10 +10,12 @@ import { api } from "../../backend/api"
 import * as Yup from "yup"
 import { validationErrors } from "../../tools/validationErrors"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useUser } from "../../hooks/useUser"
 
 interface LoginComponentProps {}
 
 export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
+    const { onLogin } = useUser()
     const theme = useTheme()
     const password_ref = useRef<TextInput>(null)
 

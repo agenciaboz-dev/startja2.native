@@ -12,7 +12,7 @@ export const LinksComponent: React.FC<LinksComponentProps> = ({}) => {
         <View
             style={[{ flexDirection: "row", justifyContent: "space-between" }, Platform.OS == "web" ? { marginVertical: 20 } : { marginTop: "auto" }]}
         >
-            <LinkButton to="/login">Esqueci minha senha</LinkButton>
+            <LinkButton to="/forgot-password">Esqueci minha senha</LinkButton>
             <LinkButton to="/budget">Não sou cliente</LinkButton>
         </View>
     )

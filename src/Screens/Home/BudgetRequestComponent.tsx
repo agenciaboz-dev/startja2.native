@@ -10,6 +10,7 @@ import * as Yup from "yup"
 import { validationErrors } from "../../tools/validationErrors"
 import { api } from "../../backend/api"
 import { useLinkTo } from "@react-navigation/native"
+import { TwoButtonsView } from "../../components/TwoButtonsView"
 
 interface BudgetRequestComponentProps {}
 
@@ -82,18 +83,12 @@ export const BudgetRequestComponent: React.FC<BudgetRequestComponentProps> = ({}
                 />
 
                 <FormText label={"Mensagem"} formik={formik} name="password" placeholder="Digite ua mensagem" multiline numberOfLines={4} />
-                <View
-                    style={[
-                        Platform.OS == "web"
-                            ? { flexDirection: "row-reverse", justifyContent: "space-between" }
-                            : { alignItems: "center", gap: 20, marginTop: 20 },
-                    ]}
-                >
-                    <Button mode="contained" onPress={() => formik.handleSubmit()}>
+                <TwoButtonsView>
+                    <Button mode="contained" onPress={() => formik.handleSubmit()} loading={loading}>
                         Enviar
                     </Button>
                     <LinkButton to="/login">Voltar</LinkButton>
-                </View>
+                </TwoButtonsView>
             </View>
         </View>
     )

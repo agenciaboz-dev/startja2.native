@@ -12,8 +12,6 @@ export const useUser = () => {
     const onLogin = (user: User, externalRoute?: { path: string; query: any }) => {
         context.setUser(user)
 
-        navigation.navigate("mainscreen")
-
         if (externalRoute) {
             setTimeout(() => navigation.push(externalRoute.path, externalRoute.query), 200)
         }

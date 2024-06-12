@@ -22,6 +22,7 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                         login: "/login",
                         budget: "/budget",
                         budgetSuccess: "/budget/success",
+                        forgotPassword: "/forgot-password",
                     },
                 },
             }}
