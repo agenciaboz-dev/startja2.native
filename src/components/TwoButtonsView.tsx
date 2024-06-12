@@ -7,14 +7,6 @@ interface TwoButtonsViewProps {
 
 export const TwoButtonsView: React.FC<TwoButtonsViewProps> = ({ children }) => {
     return (
-        <View
-            style={[
-                Platform.OS == "web"
-                    ? { flexDirection: "row-reverse", justifyContent: "space-between" }
-                    : { alignItems: "center", gap: 20, marginTop: 20 },
-            ]}
-        >
-            {children}
-        </View>
+        <View style={[{ flexDirection: "row-reverse", justifyContent: "space-between" }, Platform.OS != "web" && { marginTop: 20 }]}>{children}</View>
     )
 }

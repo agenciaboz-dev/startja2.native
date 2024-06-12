@@ -12,6 +12,7 @@ import { default_navigator_options } from "../../tools/default_navigator_options
 import { BudgetRequestComponent } from "./BudgetRequestComponent"
 import { BudgetSuccess } from "./BudgetSuccess"
 import { ForgotPasswordForm } from "./ForgotPassword/ForgotPasswordForm"
+import { CodeVerification } from "./ForgotPassword/CodeVerification"
 
 interface HomeProps {}
 
@@ -43,13 +44,14 @@ const HomeStack: React.FC = () => (
         <Stack.Screen name="budget" component={BudgetRequestComponent} />
         <Stack.Screen name="budgetSuccess" component={BudgetSuccess} />
         <Stack.Screen name="forgotPassword" component={ForgotPasswordForm} />
+        <Stack.Screen name="codeVerification" component={CodeVerification} />
     </Stack.Navigator>
 )
 
 export const Home: React.FC<HomeProps> = ({}) => {
     return Platform.OS == "web" ? (
         <View style={{ flex: 1, flexDirection: "row" }}>
-            <View style={{ flex: 0.4, padding: 50, gap: 20, paddingHorizontal: 150 }}>
+            <View style={{ flex: 0.4, padding: 50, gap: 20, paddingHorizontal: 150, paddingBottom: 0 }}>
                 <LogoComponent />
                 <HomeStack />
             </View>

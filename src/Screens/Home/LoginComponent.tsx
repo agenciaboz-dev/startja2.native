@@ -11,6 +11,7 @@ import * as Yup from "yup"
 import { validationErrors } from "../../tools/validationErrors"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useUser } from "../../hooks/useUser"
+import { TwoButtonsView } from "../../components/TwoButtonsView"
 
 interface LoginComponentProps {}
 
@@ -98,13 +99,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
                 onSubmitEditing={() => formik.handleSubmit()}
                 right={<Input.Icon icon={!hiddenPassword ? "eye" : "eye-off"} onPress={() => setHiddenPassword((value) => !value)} />}
             />
-            <View
-                style={[
-                    Platform.OS == "web"
-                        ? { flexDirection: "row-reverse", justifyContent: "space-between" }
-                        : { alignItems: "center", gap: 20, padding: 20 },
-                ]}
-            >
+            <TwoButtonsView>
                 <Button mode="contained" onPress={() => formik.handleSubmit()} loading={loading}>
                     Entrar
                 </Button>
@@ -115,7 +110,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
                     reverse
                     style={{ marginLeft: -8 }}
                 />
-            </View>
+            </TwoButtonsView>
         </View>
     )
 }

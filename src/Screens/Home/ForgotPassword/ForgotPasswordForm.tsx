@@ -7,11 +7,13 @@ import { colors } from "../../../style/colors"
 import { TwoButtonsView } from "../../../components/TwoButtonsView"
 import { LinkButton } from "../../../components/LinkButton"
 import { api } from "../../../backend/api"
+import { useLinkTo } from "@react-navigation/native"
 
 interface ForgotPasswordFormProps {}
 
 export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({}) => {
     const theme = useTheme()
+    const linkTo = useLinkTo<any>()
 
     const [loading, setLoading] = useState(false)
 
@@ -22,7 +24,8 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({}) => {
             setLoading(true)
 
             try {
-                const response = await api.post()
+                const response = await api.post("/user/forgot_password", values)
+                linkTo({ screen: "codeVerification", params: { email: values.login } })
             } catch (error) {
                 console.log(error)
             } finally {
