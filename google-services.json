@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "793651321653",
+    "project_id": "start-ja",
+    "storage_bucket": "start-ja.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:793651321653:android:16e85f3fc086b647abca7c",
+        "android_client_info": {
+          "package_name": "com.agenciabozdev.startja"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0KVmYJ8MgSz5E8K8WlChA6r1sLi7hgk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
