@@ -41,7 +41,7 @@ const HomeComponent: React.FC = () => (
 )
 
 const HomeStack: React.FC = () => (
-    <Stack.Navigator screenOptions={default_navigator_options} initialRouteName="login">
+    <Stack.Navigator screenOptions={default_navigator_options}>
         <Stack.Screen name="login" component={HomeComponent} />
         <Stack.Screen name="budget" component={BudgetRequestComponent} />
         <Stack.Screen name="budgetSuccess" component={BudgetSuccess} />
