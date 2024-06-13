@@ -31,6 +31,7 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                                 successComponent: "forgot-password/success",
                             },
                         },
+                        notfound: "*",
                     },
                 },
             }}
@@ -40,7 +41,7 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                 <UserProvider>
                     <NotificationProvider>
                         {children}
-                        {/* <Text style={{ position: "absolute", bottom: 5, right: 5, color: "red" }}>{constants.expoConfig?.version}</Text> */}
+                        <Text style={{ position: "absolute", bottom: 5, right: 5, color: "red" }}>{constants.expoConfig?.version}</Text>
                     </NotificationProvider>
                 </UserProvider>
             </PaperProvider>

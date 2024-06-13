@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 import { default_navigator_options } from "./tools/default_navigator_options"
 import { Platform } from "react-native"
 import { Home } from "./Screens/Home/Home"
+import { NotFound } from "./Screens/NotFound"
 
 interface RoutesProps {}
 
@@ -27,6 +28,7 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
             }}
         >
             <Stack.Screen name="home" component={Home} options={{ headerShown: false }} />
+            <Stack.Screen name="notfound" component={NotFound} options={{ headerShown: false }} />
         </Stack.Navigator>
     )
 }
