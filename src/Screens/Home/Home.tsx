@@ -13,6 +13,8 @@ import { BudgetRequestComponent } from "./BudgetRequestComponent"
 import { BudgetSuccess } from "./BudgetSuccess"
 import { ForgotPasswordForm } from "./ForgotPassword/ForgotPasswordForm"
 import { CodeVerification } from "./ForgotPassword/CodeVerification"
+import { ResetPasswordForm } from "./ForgotPassword/ResetPasswordForm"
+import { SuccessComponent } from "./ForgotPassword/SuccessComponent"
 
 interface HomeProps {}
 
@@ -45,6 +47,8 @@ const HomeStack: React.FC = () => (
         <Stack.Screen name="budgetSuccess" component={BudgetSuccess} />
         <Stack.Screen name="forgotPassword" component={ForgotPasswordForm} />
         <Stack.Screen name="codeVerification" component={CodeVerification} />
+        <Stack.Screen name="resetPassword" component={ResetPasswordForm} />
+        <Stack.Screen name="successComponent" component={SuccessComponent} />
     </Stack.Navigator>
 )
 

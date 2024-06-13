@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { TextInput, View } from "react-native"
 import { SectionWrapper } from "../SectionWrapper"
 import { Text, TextInput as Input, Button, useTheme } from "react-native-paper"
-import { RouteProp } from "@react-navigation/native"
+import { RouteProp, useLinkTo } from "@react-navigation/native"
 import { colors } from "../../../style/colors"
 import { TwoButtonsView } from "../../../components/TwoButtonsView"
 import { LinkButton } from "../../../components/LinkButton"
@@ -16,6 +16,7 @@ interface CodeVerificationProps {
 export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => {
     const theme = useTheme()
     const email = route.params?.email
+    const linkTo = useLinkTo<any>()
 
     const input_states = new Array(5).fill(null).map(() => useState(""))
     const input_refs = new Array(5).fill(null).map(() => useRef<TextInput>(null))
@@ -57,13 +58,8 @@ export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => 
             })
             const recovery = response.data as Recovery | null
             if (recovery) {
-                const expired = new Date().getTime() - Number(recovery.datetime) >= 1000 * 60 * 15
-                if (expired) {
-                    setError(true)
-                } else {
-                    // navigate to redefine
-                    console.log(recovery)
-                }
+                console.log(recovery)
+                linkTo({ screen: "resetPassword", params: { email: recovery.target } })
             } else {
                 setError(true)
             }
