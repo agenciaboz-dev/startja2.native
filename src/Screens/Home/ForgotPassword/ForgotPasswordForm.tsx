@@ -51,6 +51,8 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({}) => {
                 keyboardType="email-address"
                 autoCapitalize={"none"}
                 placeholder="Digite seu endereço de e-mail"
+                onSubmitEditing={() => formik.handleSubmit()}
+                returnKeyType="done"
             />
             <TwoButtonsView>
                 <Button mode="contained" onPress={() => formik.handleSubmit()} loading={loading}>

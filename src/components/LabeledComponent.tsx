@@ -21,6 +21,7 @@ export const LabeledComponent: React.FC<LabeledComponentProps> = ({ label, Compo
                     flexDirection: orientation == "horizontal" ? "row-reverse" : "column-reverse",
                     justifyContent: "flex-start",
                 },
+
                 style,
             ]}
         >

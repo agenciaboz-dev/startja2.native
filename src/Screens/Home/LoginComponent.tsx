@@ -108,7 +108,6 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
                     label={"Manter conectado"}
                     orientation="horizontal"
                     reverse
-                    style={{ marginLeft: -8 }}
                 />
             </TwoButtonsView>
         </View>
