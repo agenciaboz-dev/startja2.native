@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { TextInput, View } from "react-native"
 import { SectionWrapper } from "../SectionWrapper"
-import { Text, TextInput as Input, Button, useTheme } from "react-native-paper"
+import { Text, TextInput as Input, Button, useTheme, Icon } from "react-native-paper"
 import { RouteProp, useLinkTo } from "@react-navigation/native"
 import { colors } from "../../../style/colors"
 import { TwoButtonsView } from "../../../components/TwoButtonsView"
@@ -102,7 +102,12 @@ export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => 
                     />
                 ))}
             </View>
-            {error && <Text style={{ color: theme.colors.error, marginTop: -10 }}>Código inválido ou expirado</Text>}
+            {error && (
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Icon size={20} source={"alert-circle"} />
+                    <Text style={{ color: theme.colors.error, marginTop: -10 }}>Código inválido ou expirado</Text>
+                </View>
+            )}
 
             <TwoButtonsView>
                 <Button mode="contained" onPress={onVerifyPress} loading={loading}>
