@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import { TextInput, View } from "react-native"
+import { TextInput, TouchableOpacity, View } from "react-native"
 import { SectionWrapper } from "../SectionWrapper"
 import { Text, TextInput as Input, Button, useTheme, Icon } from "react-native-paper"
 import { RouteProp, useLinkTo } from "@react-navigation/native"
@@ -23,6 +23,7 @@ export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => 
 
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
+    const [resendText, setResendText] = useState<"Reenviar" | "Enviado">("Reenviar")
 
     const onChangeText = (text: string, index: number) => {
         if (isNaN(Number(text))) return
@@ -70,6 +71,19 @@ export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => 
         }
     }
 
+    const onResendPress = async () => {
+        if (resendText != "Reenviar") return
+
+        setResendText("Enviado")
+        try {
+            const response = await api.post("/user/forgot_password", { login: email })
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setTimeout(() => setResendText("Reenviar"), 1000 * 60 * 1)
+        }
+    }
+
     useEffect(() => {
         if (input_states.every((state) => !!state[0])) {
             console.log("preencheu")
@@ -83,14 +97,14 @@ export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => 
                 no e-mail
             </Text>
 
-            <View style={[{ flexDirection: "row", gap: 10 }]}>
+            <View style={[{ flexDirection: "row", gap: 20, justifyContent: "center" }]}>
                 {input_states.map((state, index) => (
                     <Input
                         key={index}
                         ref={input_refs[index]}
                         label={undefined}
                         mode="outlined"
-                        style={[{ backgroundColor: "transparent", flex: 1, textAlign: "center" }]}
+                        style={[{ backgroundColor: "transparent", flex: 0.18, textAlign: "center" }]}
                         outlineStyle={[{ borderRadius: 5 }, error && { borderColor: theme.colors.error }]}
                         dense
                         returnKeyType={"next"}
@@ -108,6 +122,13 @@ export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => 
                     <Text style={{ color: theme.colors.error, marginTop: -10 }}>Código inválido ou expirado</Text>
                 </View>
             )}
+
+            <Text style={{ alignSelf: "center" }}>
+                Ainda não recebeu o e-mail?{" "}
+                <TouchableOpacity onPress={onResendPress}>
+                    <Text style={{ color: colors.primary, fontWeight: "bold", textDecorationLine: "underline" }}>{resendText}</Text>
+                </TouchableOpacity>
+            </Text>
 
             <TwoButtonsView>
                 <Button mode="contained" onPress={onVerifyPress} loading={loading}>
