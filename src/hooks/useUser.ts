@@ -4,11 +4,13 @@ import { User } from "../types/server/class"
 import { useLinkTo, useNavigation } from "@react-navigation/native"
 import { api } from "../backend/api"
 import { Notification } from "../types/server/class/Notification"
+import { useKeepConnected } from "./useKeepConnected"
 
 export const useUser = () => {
     const context = useContext(UserContext)
     const navigation = useNavigation<any>()
     const linkTo = useLinkTo()
+    const keepConnected = useKeepConnected()
 
     const onLogin = (user: User, externalRoute?: { path: string; query: any }) => {
         context.setUser(user)
@@ -22,6 +24,7 @@ export const useUser = () => {
     const logout = async () => {
         if (!context.user?.expoPushToken) return
 
+        keepConnected.changeValue(false)
         context.setUser(null)
         try {
             const response = await api.patch("/user", {
