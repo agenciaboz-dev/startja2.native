@@ -18,14 +18,19 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                 prefixes: ["https://startja.agenciaboz.com.br", "http://localhost:8081"],
                 config: {
                     screens: {
-                        home: "",
-                        login: "/login",
-                        budget: "/budget",
-                        budgetSuccess: "/budget/success",
-                        forgotPassword: "/forgot-password",
-                        codeVerification: "/forgot-password/verification",
-                        resetPassword: "/forgot-password/reset",
-                        successComponent: "/forgot-password/success",
+                        home: {
+                            path: "",
+                            // @ts-ignore
+                            screens: {
+                                login: "login",
+                                budget: "budget",
+                                budgetSuccess: "budget/success",
+                                forgotPassword: "forgot-password",
+                                codeVerification: "forgot-password/verification",
+                                resetPassword: "forgot-password/reset",
+                                successComponent: "forgot-password/success",
+                            },
+                        },
                     },
                 },
             }}

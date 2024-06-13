@@ -20,7 +20,6 @@ export const useUser = () => {
     const logout = async () => {
         if (!context.user?.expoPushToken) return
 
-        navigation.navigate("home")
         context.setUser(null)
         try {
             const response = await api.patch("/user", {
