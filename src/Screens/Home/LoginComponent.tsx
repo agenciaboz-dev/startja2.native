@@ -12,17 +12,18 @@ import { validationErrors } from "../../tools/validationErrors"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useUser } from "../../hooks/useUser"
 import { TwoButtonsView } from "../../components/TwoButtonsView"
+import { useKeepConnected } from "../../hooks/useKeepConnected"
 
 interface LoginComponentProps {}
 
 export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
-    const { onLogin } = useUser()
+    const { onLogin, user } = useUser()
     const theme = useTheme()
     const password_ref = useRef<TextInput>(null)
+    const keepConnected = useKeepConnected()
 
     const [loading, setLoading] = useState(false)
     const [hiddenPassword, setHiddenPassword] = useState(true)
-    const [keepConnected, setKeepConnected] = useState(false)
 
     const validation_schema = Yup.object().shape({
         login: Yup.string().email("E-mail inválido").required(validationErrors.required),
@@ -39,7 +40,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
                 const response = await api.post("/user/login", values)
                 const user = response.data
                 if (user) {
-                    // onLogin
+                    onLogin(user)
                 } else {
                     formikHelpers.setFieldError("login", " ")
                     formikHelpers.setFieldError("password", "Nenhum usuário encontrado")
@@ -53,23 +54,6 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
         validationSchema: validation_schema,
         validateOnChange: false,
     })
-
-    const fetchKeepConnected = async () => {
-        const value = await AsyncStorage.getItem("keepConnected")
-        if (value) {
-            setKeepConnected(JSON.parse(value))
-        }
-    }
-
-    const handleKeepConnectedChange = async () => {
-        const value = !keepConnected
-        setKeepConnected(value)
-        await AsyncStorage.setItem("keepConnected", JSON.stringify(value))
-    }
-
-    useEffect(() => {
-        fetchKeepConnected()
-    }, [])
 
     return (
         <View style={[{ gap: 20, borderTopColor: theme.colors.outlineVariant, borderTopWidth: 1 }, Platform.OS != "web" && { gap: 10 }]}>
@@ -106,7 +90,10 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
                 <LabeledComponent
                     Component={
                         <View style={[Platform.OS == "ios" && { borderWidth: 1, borderRadius: 100 }]}>
-                            <Checkbox status={keepConnected ? "checked" : "unchecked"} onPress={(e) => handleKeepConnectedChange()} />
+                            <Checkbox
+                                status={keepConnected.value ? "checked" : "unchecked"}
+                                onPress={() => keepConnected.changeValue(!keepConnected.value)}
+                            />
                         </View>
                     }
                     label={"Manter conectado"}

@@ -8,8 +8,9 @@ import * as SplashScreen from "expo-splash-screen"
 import { useCallback } from "react"
 import { Lato_400Regular, Lato_700Bold, useFonts } from "@expo-google-fonts/lato"
 import { NotificationsHandler } from "./src/components/NotificationsHandler"
+import { HandleKeepSession } from "./src/components/HandleKeepSession"
 
-// SplashScreen.preventAutoHideAsync()
+SplashScreen.preventAutoHideAsync()
 
 // if (Platform.OS === "android" && UIManager.setLayoutAnimationEnabledExperimental) {
 //     UIManager.setLayoutAnimationEnabledExperimental(true)
@@ -39,6 +40,7 @@ export default function App() {
                 <StatusBar animated translucent style={"dark"} />
                 <Routes />
                 <NotificationsHandler />
+                <HandleKeepSession />
             </Providers>
         </View>
     )

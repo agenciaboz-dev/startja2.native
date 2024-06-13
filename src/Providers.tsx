@@ -31,6 +31,7 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                                 successComponent: "forgot-password/success",
                             },
                         },
+                        systemChooser: "selecionar-sistema",
                         notfound: "*",
                     },
                 },

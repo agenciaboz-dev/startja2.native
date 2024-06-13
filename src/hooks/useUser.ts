@@ -1,16 +1,18 @@
 import { useContext } from "react"
 import UserContext from "../contexts/userContext"
 import { User } from "../types/server/class"
-import { useNavigation } from "@react-navigation/native"
+import { useLinkTo, useNavigation } from "@react-navigation/native"
 import { api } from "../backend/api"
 import { Notification } from "../types/server/class/Notification"
 
 export const useUser = () => {
     const context = useContext(UserContext)
     const navigation = useNavigation<any>()
+    const linkTo = useLinkTo()
 
     const onLogin = (user: User, externalRoute?: { path: string; query: any }) => {
         context.setUser(user)
+        linkTo("/selecionar-sistema")
 
         if (externalRoute) {
             setTimeout(() => navigation.push(externalRoute.path, externalRoute.query), 200)
