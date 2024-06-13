@@ -8,6 +8,8 @@ import { TwoButtonsView } from "../../../components/TwoButtonsView"
 import { LinkButton } from "../../../components/LinkButton"
 import { api } from "../../../backend/api"
 import { useLinkTo } from "@react-navigation/native"
+import * as Yup from "yup"
+import { validationErrors } from "../../../tools/validationErrors"
 
 interface ForgotPasswordFormProps {}
 
@@ -17,6 +19,10 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({}) => {
 
     const [loading, setLoading] = useState(false)
 
+    const validation_schema = Yup.object().shape({
+        login: Yup.string().required(validationErrors.required).email("E-mail inválido"),
+    })
+
     const formik = useFormik({
         initialValues: { login: "" },
         async onSubmit(values, formikHelpers) {
@@ -25,13 +31,15 @@ export const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({}) => {
 
             try {
                 const response = await api.post("/user/forgot_password", values)
-                linkTo({ screen: "codeVerification", params: { email: values.login } })
             } catch (error) {
                 console.log(error)
             } finally {
                 setLoading(false)
+                linkTo({ screen: "codeVerification", params: { email: values.login } })
             }
         },
+        validationSchema: validation_schema,
+        validateOnChange: false,
     })
 
     return (

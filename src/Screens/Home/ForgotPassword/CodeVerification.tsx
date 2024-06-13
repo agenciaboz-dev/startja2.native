@@ -134,7 +134,7 @@ export const CodeVerification: React.FC<CodeVerificationProps> = ({ route }) => 
                 <Button mode="contained" onPress={onVerifyPress} loading={loading}>
                     Verificar código
                 </Button>
-                <LinkButton to="/login">Voltar</LinkButton>
+                <LinkButton to="/forgot-password">Voltar</LinkButton>
             </TwoButtonsView>
         </SectionWrapper>
     )
