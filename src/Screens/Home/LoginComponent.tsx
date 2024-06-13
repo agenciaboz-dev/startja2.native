@@ -104,7 +104,11 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
                     Entrar
                 </Button>
                 <LabeledComponent
-                    Component={<Checkbox status={keepConnected ? "checked" : "unchecked"} onPress={(e) => handleKeepConnectedChange()} />}
+                    Component={
+                        <View style={[Platform.OS == "ios" && { borderWidth: 1, borderRadius: 100 }]}>
+                            <Checkbox status={keepConnected ? "checked" : "unchecked"} onPress={(e) => handleKeepConnectedChange()} />
+                        </View>
+                    }
                     label={"Manter conectado"}
                     orientation="horizontal"
                     reverse
