@@ -15,6 +15,7 @@ import { ForgotPasswordForm } from "./ForgotPassword/ForgotPasswordForm"
 import { CodeVerification } from "./ForgotPassword/CodeVerification"
 import { ResetPasswordForm } from "./ForgotPassword/ResetPasswordForm"
 import { SuccessComponent } from "./ForgotPassword/SuccessComponent"
+import { HandleKeepSession } from "../../components/HandleKeepSession"
 
 interface HomeProps {}
 
@@ -37,6 +38,7 @@ const HomeComponent: React.FC = () => (
         <LoginComponent />
         <LinksComponent />
         {Platform.OS == "web" && <DistributionStores />}
+        <HandleKeepSession />
     </>
 )
 

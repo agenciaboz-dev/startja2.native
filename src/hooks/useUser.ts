@@ -26,6 +26,7 @@ export const useUser = () => {
 
         keepConnected.changeValue(false)
         context.setUser(null)
+        linkTo("/login")
         try {
             const response = await api.patch("/user", {
                 id: context.user.id,

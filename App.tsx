@@ -3,12 +3,11 @@ import { StatusBar } from "expo-status-bar"
 import { Providers } from "./src/Providers"
 import { Routes } from "./src/Routes"
 import { useKeepAwake } from "expo-keep-awake"
-import { View } from "react-native"
+import { SafeAreaView, View } from "react-native"
 import * as SplashScreen from "expo-splash-screen"
 import { useCallback } from "react"
 import { Lato_400Regular, Lato_700Bold, useFonts } from "@expo-google-fonts/lato"
 import { NotificationsHandler } from "./src/components/NotificationsHandler"
-import { HandleKeepSession } from "./src/components/HandleKeepSession"
 
 SplashScreen.preventAutoHideAsync()
 
@@ -35,13 +34,12 @@ export default function App() {
     }
 
     return (
-        <View onLayout={onLayoutRootView} style={{ flex: 1 }}>
+        <SafeAreaView onLayout={onLayoutRootView} style={{ flex: 1 }}>
             <Providers>
                 <StatusBar animated translucent style={"dark"} />
                 <Routes />
                 <NotificationsHandler />
-                <HandleKeepSession />
             </Providers>
-        </View>
+        </SafeAreaView>
     )
 }
