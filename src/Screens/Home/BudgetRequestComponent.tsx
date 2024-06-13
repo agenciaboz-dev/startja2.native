@@ -37,6 +37,12 @@ export const BudgetRequestComponent: React.FC<BudgetRequestComponentProps> = ({}
             try {
                 const response = await api.post("/user", values)
                 console.log(response.data)
+                const error = response.data.error
+                if (error) {
+                    formik.setFieldError(error.key, error.message)
+                    throw error.message
+                }
+
                 const user = response.data
                 if (user) {
                     linkTo("/budget/success")
