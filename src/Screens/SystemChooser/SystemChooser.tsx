@@ -40,7 +40,7 @@ export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
             <UserCard />
 
             <Title
-                description="Você gerencia múltiplos sistemas. Por favor, seleciona o sistema que deseja acessar a partir do painel abaixo para prosseguir com o
+                description="Você gerencia múltiplos sistemas. Por favor, selecione o sistema que deseja acessar a partir do painel abaixo para prosseguir com o
                 login e utilizar os serviços associados."
             >
                 Gestão de contas
