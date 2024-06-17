@@ -2,6 +2,8 @@ import { Image } from "expo-image"
 import React from "react"
 import { TouchableOpacity, View } from "react-native"
 import { Text, TouchableRipple, useTheme } from "react-native-paper"
+import { colors } from "../style/colors"
+import constants from "expo-constants"
 
 interface DistributionStoresProps {}
 
@@ -38,22 +40,32 @@ const ItemContainer: React.FC<{ apple?: boolean }> = ({ apple }) => {
 
 export const DistributionStores: React.FC<DistributionStoresProps> = ({}) => {
     const theme = useTheme()
+    const currentYear = new Date().getFullYear()
 
     return (
         <View
             style={{
                 alignItems: "center",
-                padding: 10,
-                backgroundColor: "#F2F3F5",
-                borderRadius: 5,
                 gap: 10,
                 alignSelf: "center",
+                paddingBottom: 50,
             }}
         >
             <Text>Obtenha o aplicativo</Text>
             <View style={{ flexDirection: "row", gap: 20 }}>
                 <ItemContainer apple />
                 <ItemContainer />
+            </View>
+            <View
+                style={{
+                    alignItems: "center",
+                }}
+            >
+                <Text style={{ color: colors.grey }}>
+                    v{constants.expoConfig?.version} @ {currentYear} | Start Já
+                </Text>
+                <Text style={{ color: colors.grey }}>Designed and powered by BOZ</Text>
+                <Text style={{ color: colors.grey }}>Todos os direitos reservados</Text>
             </View>
         </View>
     )
