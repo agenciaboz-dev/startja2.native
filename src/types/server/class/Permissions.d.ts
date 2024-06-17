@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { WithoutFunctions } from "./helpers";
 export declare const customer_permissions_include: {
     nfePermissions: true;
 };
@@ -7,6 +8,7 @@ type CustomerPermissionsPrisma = Prisma.CustomerPermissionsGetPayload<{
 }>;
 type NfePermissionsPrisma = Prisma.NfePermissionsGetPayload<{}>;
 type ResalePermissionsPrisma = Prisma.ResalePermissionsGetPayload<{}>;
+export type ResalePermissionsForm = Omit<WithoutFunctions<ResalePermissions>, "id">;
 export declare class ResalePermissions {
     id: number;
     customers: number;

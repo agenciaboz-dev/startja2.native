@@ -4,6 +4,7 @@ import { colors } from "../../style/colors"
 import { UserCard } from "../../components/UserCard/UserCard"
 import { IconButton, Text } from "react-native-paper"
 import { useUser } from "../../hooks/useUser"
+import { SystemWrapper } from "./SystemWrapper"
 
 interface SystemChooserProps {}
 
@@ -25,6 +26,7 @@ const Title: React.FC<{ children?: React.ReactNode; right?: React.ReactNode; des
 
 export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
     const { logout } = useUser()
+    const { user } = useUser()
 
     return (
         <ScrollView
@@ -45,6 +47,18 @@ export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
             >
                 Gestão de contas
             </Title>
+
+            {user?.admin && <SystemWrapper name="Admin. Master" systems={[{ name: "Sistema", route: "/admin" }]} />}
+
+            {(!!user?.resales.length || !!user?.resalesManager.length) && (
+                <SystemWrapper
+                    name="Revendas"
+                    systems={[
+                        ...user.resalesManager.map((item) => ({ name: item.name, route: item.id })),
+                        ...user.resales.map((item) => ({ name: item.resale.name, route: item.resale_id })),
+                    ]}
+                />
+            )}
         </ScrollView>
     )
 }

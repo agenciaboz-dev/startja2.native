@@ -8,5 +8,6 @@ export declare class Recovery {
     constructor(data: RecoveryPrisma);
     static new(target: string): Promise<Recovery>;
     static verifyCode(target: string, code: number[]): Promise<Recovery | null>;
+    static finish(target: string): Promise<Prisma.BatchPayload>;
 }
 export {};

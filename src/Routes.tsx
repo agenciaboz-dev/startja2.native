@@ -5,6 +5,7 @@ import { Platform } from "react-native"
 import { Home } from "./Screens/Home/Home"
 import { NotFound } from "./Screens/NotFound"
 import { SystemChooser } from "./Screens/SystemChooser/SystemChooser"
+import { AdminScreen } from "./Screens/Admin/AdminScreen"
 
 interface RoutesProps {}
 
@@ -12,6 +13,7 @@ export type HomeStackParams = {
     home: undefined
     notfound: undefined
     systemChooser: undefined
+    admin: undefined
 }
 
 const Stack = createNativeStackNavigator<HomeStackParams>()
@@ -24,11 +26,13 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
             screenOptions={{
                 ...default_navigator_options,
                 header: undefined,
+                headerShown: false,
             }}
         >
-            <Stack.Screen name="home" component={Home} options={{ headerShown: false }} />
-            <Stack.Screen name="notfound" component={NotFound} options={{ headerShown: false }} />
-            <Stack.Screen name="systemChooser" component={SystemChooser} options={{ headerShown: false }} />
+            <Stack.Screen name="home" component={Home} />
+            <Stack.Screen name="notfound" component={NotFound} />
+            <Stack.Screen name="systemChooser" component={SystemChooser} />
+            <Stack.Screen name="admin" component={AdminScreen} />
         </Stack.Navigator>
     )
 }

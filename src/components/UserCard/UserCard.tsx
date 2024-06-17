@@ -23,9 +23,10 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
                 {Platform.OS !== "web" && <UserData title="NOME DE USUÁRIO" value={user.name} />}
             </View>
             {Platform.OS == "web" ? (
-                <View>
+                <View style={{ gap: 5 }}>
                     <UserData title="NOME DE USUÁRIO" value={user.name} />
                     <UserData title="TELEFONE" value={user.phone} />
+                    <UserData title="ID" value={user.id} />
                 </View>
             ) : (
                 <>

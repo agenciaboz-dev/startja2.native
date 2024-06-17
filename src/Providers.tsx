@@ -32,6 +32,11 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                             },
                         },
                         systemChooser: "selecionar-sistema",
+                        admin: {
+                            path: "admin",
+                            // @ts-ignore
+                            screens: {},
+                        },
                         notfound: "*",
                     },
                 },

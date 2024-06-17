@@ -92,7 +92,11 @@ export declare class User {
     static signup(form: UserForm): Promise<User>;
     static login(data: LoginForm): Promise<User | null>;
     static findById(id: string): Promise<User>;
+    static findByEmail(email: string): Promise<User>;
     load(data: UserPrisma): void;
-    update(data: Partial<User>): Promise<string | undefined>;
+    update(data: Partial<User>): Promise<string | {
+        message: string;
+        key: string;
+    } | undefined>;
     updateImage(data: FileUpload): string;
 }
