@@ -7,4 +7,5 @@ export const colors = {
     disabled: "#eeee",
     box: "#F8F8F8",
     grey: "#4E5058",
+    dark: "#060607",
 }

@@ -57,7 +57,7 @@ const HomeStack: React.FC = () => (
 export const Home: React.FC<HomeProps> = ({}) => {
     return Platform.OS == "web" ? (
         <View style={{ flex: 1, flexDirection: "row" }}>
-            <View style={{ flex: 0.4, padding: 50, gap: 20, paddingHorizontal: 150, paddingBottom: 0 }}>
+            <View style={{ flex: 0.4, padding: 50, gap: 20, paddingHorizontal: 150, paddingBottom: 50, overflow: "scroll" }}>
                 <LogoComponent />
                 <HomeStack />
             </View>
