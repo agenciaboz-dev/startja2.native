@@ -89,10 +89,11 @@ export declare class User {
     constructor(id: string, user_prisma?: UserPrisma);
     init(): Promise<void>;
     static list(): Promise<User[]>;
+    static newResaleManager(form: UserForm, resale_name: string): Promise<User>;
     static signup(form: UserForm): Promise<User>;
     static login(data: LoginForm): Promise<User | null>;
-    static findById(id: string): Promise<User>;
-    static findByEmail(email: string): Promise<User>;
+    static findById(id: string): Promise<User | null>;
+    static findByEmail(email: string): Promise<User | null>;
     load(data: UserPrisma): void;
     update(data: Partial<User>): Promise<string | {
         message: string;

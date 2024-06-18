@@ -10,7 +10,7 @@ export declare const resale_include: {
 type ResalePrima = Prisma.ResaleGetPayload<{
     include: typeof resale_include;
 }>;
-export type ResaleForm = Omit<WithoutFunctions<Resale>, "id" | "manager_id" | "permissions" | "profilePic"> & {
+export type ResaleForm = Omit<WithoutFunctions<Resale>, "id" | "manager_id" | "permissions" | "profilePic" | "created_at"> & {
     profilePic?: FileUpload;
     manager: UserForm;
     permissions: ResalePermissionsForm;
@@ -21,9 +21,12 @@ export declare class Resale {
     manager_id: string;
     permissions: ResalePermissions;
     profilePic: Media | null;
+    created_at: string;
     constructor(id: string, data?: ResalePrima);
     static list(): Promise<Resale[]>;
+    static new(form: ResaleForm): Promise<Resale>;
     load(data: ResalePrima): void;
     init(): Promise<void>;
+    updateProfilePic(image: FileUpload): Promise<void>;
 }
 export {};

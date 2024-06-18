@@ -17,6 +17,7 @@ export declare class ResalePermissions {
     editPermissions: boolean;
     inviteUser: boolean;
     constructor(data: ResalePermissionsPrisma);
+    static new(form: ResalePermissionsForm): Promise<ResalePermissions>;
 }
 export declare class NfePermissions {
     id: number;

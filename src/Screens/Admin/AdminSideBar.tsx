@@ -3,30 +3,31 @@ import React, { useEffect, useState } from "react"
 import { Platform, View, NativeModules, FlatList } from "react-native"
 import { Portal, Surface, Text, TouchableRipple } from "react-native-paper"
 import { colors } from "../../style/colors"
-import { api } from "../../backend/api"
 import { Resale } from "../../types/server/class/Resale"
 import { ResaleComponent } from "./ResaleComponent"
 import { ResaleFormModal } from "./ResaleFormModal"
+import { useResale } from "../../hooks/useResale"
 const { StatusBarManager } = NativeModules
 
 interface AdminSideBarProps {}
 
 export const AdminSideBar: React.FC<AdminSideBarProps> = ({}) => {
     const icon_size = Platform.OS == "web" ? 75 : 50
+    const { fetchAllResales } = useResale()
 
     const [loading, setLoading] = useState(true)
     const [resales, setResales] = useState<Resale[]>([])
     const [showResaleModal, setShowResaleModal] = useState(false)
 
     const onNewResale = (resale: Resale) => {
-        setResales([...resales.filter(item => item.id != resale.id), resale])
+        setResales([...resales.filter((item) => item.id != resale.id), resale])
     }
 
     const fetchResales = async () => {
         setLoading(true)
         try {
-            const response = await api.get("/resale/admin")
-            setResales(response.data)
+            const data = await fetchAllResales()
+            setResales(data)
         } catch (error) {
             console.log(error)
         } finally {
@@ -50,7 +51,7 @@ export const AdminSideBar: React.FC<AdminSideBarProps> = ({}) => {
             ]}
         >
             <FlatList
-                data={resales}
+                data={resales.sort((a, b) => Number(b.created_at) - Number(a.created_at))}
                 renderItem={({ item }) => <ResaleComponent icon_size={icon_size} resale={item} />}
                 keyExtractor={(item) => item.id}
                 horizontal={Platform.OS != "web"}

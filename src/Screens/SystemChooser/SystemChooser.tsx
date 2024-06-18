@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Platform, ScrollView, View } from "react-native"
 import { colors } from "../../style/colors"
 import { UserCard } from "../../components/UserCard/UserCard"
@@ -6,6 +6,8 @@ import { IconButton, Text } from "react-native-paper"
 import { useUser } from "../../hooks/useUser"
 import { SystemWrapper } from "./SystemWrapper"
 import { Redirect } from "../../components/Redirect"
+import { Resale } from "../../types/server/class/Resale"
+import { useResale } from "../../hooks/useResale"
 
 interface SystemChooserProps {}
 
@@ -28,8 +30,24 @@ const Title: React.FC<{ children?: React.ReactNode; right?: React.ReactNode; des
 export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
     const { logout } = useUser()
     const { user } = useUser()
+    const { fetchAllResales } = useResale()
 
-    console.log(user)
+    const [adminResales, setAdminResales] = useState<Resale[]>([])
+
+    const fetchAdminResales = async () => {
+        try {
+            const data = await fetchAllResales()
+            setAdminResales(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        if (user?.admin) {
+            fetchAdminResales()
+        }
+    }, [user])
 
     return user ? (
         <ScrollView
@@ -53,14 +71,27 @@ export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
 
             {user?.admin && <SystemWrapper name="Admin. Master" systems={[{ name: "Sistema", route: "/admin" }]} />}
 
-            {(!!user?.resales.length || !!user?.resalesManager.length) && (
+            {user.admin ? (
                 <SystemWrapper
                     name="Revendas"
-                    systems={[
-                        ...user.resalesManager.map((item) => ({ name: item.name, route: item.id })),
-                        ...user.resales.map((item) => ({ name: item.resale.name, route: item.resale_id })),
-                    ]}
+                    systems={adminResales
+                        .sort((a, b) => Number(b.created_at) - Number(a.created_at))
+                        .map((item) => ({ name: item.name, route: item.id }))}
                 />
+            ) : (
+                (!!user?.resales.length || !!user?.resalesManager.length) && (
+                    <SystemWrapper
+                        name="Revendas"
+                        systems={[
+                            ...user.resalesManager
+                                .sort((a, b) => Number(b.created_at) - Number(a.created_at))
+                                .map((item) => ({ name: item.name, route: item.id })),
+                            ...user.resales
+                                .sort((a, b) => Number(b.resale.created_at) - Number(a.resale.created_at))
+                                .map((item) => ({ name: item.resale.name, route: item.resale_id })),
+                        ]}
+                    />
+                )
             )}
         </ScrollView>
     ) : (
