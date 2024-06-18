@@ -26,7 +26,6 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
                 <View style={{ gap: 5 }}>
                     <UserData title="NOME DE USUÁRIO" value={user.name} />
                     <UserData title="TELEFONE" value={user.phone} />
-                    <UserData title="ID" value={user.id} />
                 </View>
             ) : (
                 <>
