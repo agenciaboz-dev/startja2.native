@@ -18,6 +18,10 @@ export const AdminSideBar: React.FC<AdminSideBarProps> = ({}) => {
     const [resales, setResales] = useState<Resale[]>([])
     const [showResaleModal, setShowResaleModal] = useState(false)
 
+    const onNewResale = (resale: Resale) => {
+        setResales([...resales.filter(item => item.id != resale.id), resale])
+    }
+
     const fetchResales = async () => {
         setLoading(true)
         try {
@@ -79,7 +83,7 @@ export const AdminSideBar: React.FC<AdminSideBarProps> = ({}) => {
             />
 
             <Portal>
-                <ResaleFormModal visible={showResaleModal} onDismiss={() => setShowResaleModal(false)} />
+                <ResaleFormModal visible={showResaleModal} onDismiss={() => setShowResaleModal(false)} onNewResale={onNewResale} />
             </Portal>
         </Surface>
     )

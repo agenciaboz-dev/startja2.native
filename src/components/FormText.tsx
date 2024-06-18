@@ -5,6 +5,7 @@ import { colors } from "../style/colors"
 import { FormikErrors, FormikTouched } from "formik"
 import { mask as masked } from "react-native-mask-text"
 import { LabeledComponent } from "./LabeledComponent"
+import lodash from "lodash"
 
 export interface FormTextProps extends TextInputProps {
     name: string
@@ -27,8 +28,9 @@ export interface FormTextProps extends TextInputProps {
 
 export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>, FormTextProps>((props, ref) => {
     const theme = useTheme()
-    const error = !!(props.formik.touched[props.name] && props.formik.errors[props.name])
-    const error_text = props.formik.errors[props.name] as string
+    const error = !!(lodash.get(props.formik.touched, props.name) && lodash.get(props.formik.errors, props.name))
+    const error_text = lodash.get(props.formik.errors, props.name) as string
+
     return (
         <View style={{ width: props.width, flex: props.flex }}>
             <LabeledComponent
@@ -50,7 +52,10 @@ export const FormText = React.forwardRef<React.ElementRef<typeof OriginalInput>,
                         returnKeyType={props.returnKeyType || "next"}
                         error={error}
                         value={
-                            props.value || (props.mask ? masked(props.formik.values[props.name], props.mask) : props.formik.values[props.name] || "")
+                            props.value ||
+                            (props.mask
+                                ? masked(lodash.get(props.formik.values, props.name), props.mask)
+                                : lodash.get(props.formik.values, props.name) || "")
                         }
                         // @ts-ignore
                         onChangeText={
