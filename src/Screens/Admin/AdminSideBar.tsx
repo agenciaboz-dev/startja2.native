@@ -49,19 +49,6 @@ export const AdminSideBar: React.FC<AdminSideBarProps> = ({}) => {
                 Platform.OS == "web" ? { width: 125 } : { flexDirection: "row", paddingTop: Platform.OS == "ios" ? 20 : StatusBarManager.HEIGHT },
             ]}
         >
-            <Image
-                source={require("../../../assets/icon.png")}
-                contentFit="contain"
-                style={[{ borderRadius: 100, height: icon_size, aspectRatio: 1 }]}
-            />
-
-            <View
-                style={[
-                    { borderColor: colors.primary, borderWidth: 1 },
-                    Platform.OS == "web" ? { width: icon_size * 0.7 } : { height: icon_size * 0.7 },
-                ]}
-            />
-
             <FlatList
                 data={resales}
                 renderItem={({ item }) => <ResaleComponent icon_size={icon_size} resale={item} />}
@@ -69,6 +56,23 @@ export const AdminSideBar: React.FC<AdminSideBarProps> = ({}) => {
                 horizontal={Platform.OS != "web"}
                 refreshing={loading}
                 onRefresh={fetchResales}
+                contentContainerStyle={[{ gap: 20 }]}
+                ListHeaderComponent={
+                    <View style={[{ alignItems: "center", gap: 20 }, Platform.OS !== "web" && { flexDirection: "row" }]}>
+                        <Image
+                            source={require("../../../assets/icon.png")}
+                            contentFit="contain"
+                            style={[{ borderRadius: 100, height: icon_size, aspectRatio: 1 }]}
+                        />
+
+                        <View
+                            style={[
+                                { borderColor: colors.primary, borderWidth: 1 },
+                                Platform.OS == "web" ? { width: icon_size * 0.7 } : { height: icon_size * 0.7 },
+                            ]}
+                        />
+                    </View>
+                }
                 ListFooterComponent={
                     <TouchableRipple
                         borderless
