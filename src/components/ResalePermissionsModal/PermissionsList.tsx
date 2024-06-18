@@ -18,7 +18,16 @@ export const PermissionsList: React.FC<PermissionsListProps> = ({ title, itemHea
                 <Text style={{ flex: 0.4 }}>{title}</Text>
                 <View style={[{ flexDirection: "row", gap: 30, flex: 0.6 }]}>
                     {itemHeaders.map((item) => (
-                        <Text key={item} style={{ flex: 1, textAlign: "center" }}>
+                        <Text
+                            key={item}
+                            style={{
+                                flex: itemHeaders.length == 1 ? 0.155 : 1,
+                                marginLeft: "auto",
+                                textAlign: "center",
+                                borderColor: "#ff0000",
+                                borderWidth: 2,
+                            }}
+                        >
                             {item}
                         </Text>
                     ))}
