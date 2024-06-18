@@ -75,6 +75,7 @@ export const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ route }) =
                 name="password_confirmation"
                 placeholder="Confirme sua senha"
                 secureTextEntry={hiddenPassword}
+                onSubmitEditing={() => formik.handleSubmit()}
             />
             <TwoButtonsView>
                 <Button mode="contained" loading={loading} onPress={() => formik.handleSubmit()}>

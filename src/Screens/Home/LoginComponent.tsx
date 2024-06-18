@@ -13,11 +13,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 import { useUser } from "../../hooks/useUser"
 import { TwoButtonsView } from "../../components/TwoButtonsView"
 import { useKeepConnected } from "../../hooks/useKeepConnected"
+import { useLinkTo } from "@react-navigation/native"
 
-interface LoginComponentProps {}
+interface LoginComponentProps {
+    email: string
+    password: string
+}
 
-export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
+export const LoginComponent: React.FC<LoginComponentProps> = ({ email, password }) => {
     const { onLogin, user } = useUser()
+    const linkTo = useLinkTo()
     const theme = useTheme()
     const password_ref = useRef<TextInput>(null)
     const keepConnected = useKeepConnected()
@@ -31,7 +36,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
     })
 
     const formik = useFormik<LoginForm>({
-        initialValues: { login: "", password: "" },
+        initialValues: { login: email, password },
         async onSubmit(values, formikHelpers) {
             if (loading) return
 
@@ -53,7 +58,14 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({}) => {
         },
         validationSchema: validation_schema,
         validateOnChange: false,
+        enableReinitialize: true,
     })
+
+    useEffect(() => {
+        if (email && password === "") {
+            linkTo(`/forgot-password/reset?email=${email}`)
+        }
+    }, [email, password])
 
     return (
         <View style={[{ gap: 20, borderTopColor: theme.colors.outlineVariant, borderTopWidth: 1 }, Platform.OS != "web" && { gap: 10 }]}>

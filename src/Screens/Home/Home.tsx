@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Platform, Pressable, ScrollView, View } from "react-native"
 import { Text } from "react-native-paper"
 import { Logo } from "../../components/Logo"
@@ -17,6 +17,7 @@ import { ResetPasswordForm } from "./ForgotPassword/ResetPasswordForm"
 import { SuccessComponent } from "./ForgotPassword/SuccessComponent"
 import { HandleKeepSession } from "../../components/HandleKeepSession"
 import { AppInfo } from "../../components/AppInfo"
+import { RouteProp, useLinkTo } from "@react-navigation/native"
 
 interface HomeProps {}
 
@@ -34,15 +35,31 @@ const LogoComponent = () => (
 
 const Stack = createNativeStackNavigator()
 
-const HomeComponent: React.FC = () => (
-    <>
-        <LoginComponent />
-        <LinksComponent />
-        {Platform.OS == "web" && <DistributionStores />}
-        <AppInfo />
-        <HandleKeepSession />
-    </>
-)
+const HomeComponent: React.FC<{ route: RouteProp<any, any> }> = ({ route }) => {
+    const encrypted = route.params?.token
+
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    useEffect(() => {
+        if (encrypted) {
+            const decrypted = atob(encrypted)
+            const [email, password] = decrypted.split(":")
+            setEmail(email)
+            setPassword(password)
+        }
+    }, [])
+
+    return (
+        <>
+            <LoginComponent email={email} password={password} />
+            <LinksComponent />
+            {Platform.OS == "web" && <DistributionStores />}
+            <AppInfo />
+            <HandleKeepSession />
+        </>
+    )
+}
 
 const HomeStack: React.FC = () => (
     <Stack.Navigator screenOptions={default_navigator_options}>
@@ -76,4 +93,3 @@ export const Home: React.FC<HomeProps> = ({}) => {
         </ScrollView>
     )
 }
-
