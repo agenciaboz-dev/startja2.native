@@ -1,5 +1,5 @@
 import React from "react"
-import { View } from "react-native"
+import { Platform, View } from "react-native"
 import { PermissionModalItem } from "../../types/PermissionModalItem"
 import { Text, useTheme } from "react-native-paper"
 
@@ -14,24 +14,35 @@ export const PermissionsList: React.FC<PermissionsListProps> = ({ title, itemHea
 
     return (
         <View>
-            <View style={{ backgroundColor: theme.colors.elevation.level1, flexDirection: "row", justifyContent: "space-between", padding: 20 }}>
-                <Text style={{ flex: 0.4 }}>{title}</Text>
-                <View style={[{ flexDirection: "row", gap: 30, flex: 0.6 }]}>
+            <View
+                style={[
+                    { backgroundColor: theme.colors.elevation.level1, flexDirection: "row", justifyContent: "space-between", padding: 20 },
+                    Platform.OS !== "web" && { paddingHorizontal: 15, borderColor: "#ff0000", borderWidth: 1 },
+                ]}
+            >
+                <Text style={[Platform.OS == "web" && { flex: 0.4 }]}>{title}</Text>
+                <View style={[{ flexDirection: "row", gap: 30 }, Platform.OS == "web" && { flex: 0.6 }]}>
                     {itemHeaders.map((item) => (
                         <Text
                             key={item}
-                            style={{
-                                flex: itemHeaders.length == 1 ? 0.155 : 1,
-                                marginLeft: "auto",
-                                textAlign: "center",
-                            }}
+                            style={[
+                                {
+                                    marginLeft: "auto",
+                                    textAlign: "center",
+                                    borderColor: "#ff0000",
+                                    borderWidth: 1,
+                                },
+                                Platform.OS == "web" && {
+                                    flex: itemHeaders.length == 1 ? 0.155 : 1,
+                                },
+                            ]}
                         >
                             {item}
                         </Text>
                     ))}
                 </View>
             </View>
-            <View style={[{ flex: 0.6 }]}>{children}</View>
+            <View style={[Platform.OS == "web" && { flex: 1 }, Platform.OS !== "web" && {}]}>{children}</View>
         </View>
     )
 }
