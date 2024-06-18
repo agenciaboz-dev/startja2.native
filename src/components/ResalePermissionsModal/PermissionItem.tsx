@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleProp, TextStyle, View, ViewStyle } from "react-native"
+import { Platform, StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { Checkbox, Surface, Text, useTheme } from "react-native-paper"
 import { useUser } from "../../hooks/useUser"
 
@@ -37,12 +37,19 @@ export const PermissionItem: React.FC<PermissionItemProps> = ({ key, status, onP
                     alignItems: "center",
                     paddingHorizontal: 20,
                 },
+                Platform.OS !== "web" && { paddingHorizontal: 15 },
                 wrapperStyle,
             ]}
         >
-            <Text style={[{ flex: 0.4 }, textStyle]}>{description}</Text>
+            <Text style={[Platform.OS == "web" && { flex: 0.4 }, Platform.OS !== "web" && { flex: 1 }, textStyle]}>{description}</Text>
 
-            <View style={[{ flex: 0.093, alignItems: "center" }, checkboxStyle]}>
+            <View
+                style={[
+                    { flex: 0.093, alignItems: "center" },
+                    Platform.OS !== "web" && { flex: 0.23, borderColor: "#ff0000", borderWidth: 1 },
+                    checkboxStyle,
+                ]}
+            >
                 <Checkbox status={status ? "checked" : "unchecked"} onPress={onPress} />
             </View>
         </View>
