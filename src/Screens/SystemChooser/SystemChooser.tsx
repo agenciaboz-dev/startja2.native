@@ -5,6 +5,7 @@ import { UserCard } from "../../components/UserCard/UserCard"
 import { IconButton, Text } from "react-native-paper"
 import { useUser } from "../../hooks/useUser"
 import { SystemWrapper } from "./SystemWrapper"
+import { Redirect } from "../../components/Redirect"
 
 interface SystemChooserProps {}
 
@@ -28,7 +29,9 @@ export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
     const { logout } = useUser()
     const { user } = useUser()
 
-    return (
+    console.log(user)
+
+    return user ? (
         <ScrollView
             style={{ flex: 1 }}
             contentContainerStyle={[
@@ -60,5 +63,7 @@ export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
                 />
             )}
         </ScrollView>
+    ) : (
+        <Redirect />
     )
 }
