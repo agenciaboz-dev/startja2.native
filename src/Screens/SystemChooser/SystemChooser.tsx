@@ -35,8 +35,8 @@ export const SystemChooser: React.FC<SystemChooserProps> = ({}) => {
         <ScrollView
             style={{ flex: 1 }}
             contentContainerStyle={[
-                { flex: 1, padding: 20, paddingTop: 50, gap: 20, position: "relative" },
-                Platform.OS == "web" && { paddingHorizontal: 300, paddingTop: 100 },
+                { padding: 20, paddingVertical: 50, gap: 20, position: "relative" },
+                Platform.OS == "web" && { paddingHorizontal: 300, paddingVertical: 100 },
             ]}
         >
             <Title right={<IconButton size={30} style={{ margin: 0, position: "absolute", right: 0 }} icon={"close"} onPress={logout} />}>
