@@ -113,6 +113,24 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                 </PermissionsList>
             )}
 
+            {Platform.OS !== "web" && (
+                <View>
+                    <View style={[{ gap: 15 }]}>
+                        {Object.entries(formik.values.permissions)
+                            .filter(([key, value]) => typeof value == "number")
+                            .map((item) => (
+                                // <PermissionItem key={item[0]} description={formatPermissionsLabel(item[0])} onPress={() => onCheckboxPress(item[0], permission.value)} status={hasPermission(permission.value, formik.values.permissions[item[0]]}  />
+                                <View
+                                    key={item[0]}
+                                    style={[{ flexDirection: "row", justifyContent: "center", alignItems: "center", paddingHorizontal: 15 }]}
+                                >
+                                    <Text style={[{}]}>{formatPermissionsLabel(item[0])}</Text>
+                                </View>
+                            ))}
+                    </View>
+                </View>
+            )}
+
             <PermissionsList title="Ações" itemHeaders={["Permitir"]}>
                 <PermissionItem
                     description="Editar permissões"
