@@ -8,7 +8,7 @@ export const Redirect: React.FC<RedirectProps> = ({}) => {
     const linkTo = useLinkTo()
 
     useEffect(() => {
-        linkTo("/")
+        setTimeout(() => linkTo("/"), 100)
     }, [])
 
     return null
