@@ -113,6 +113,23 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
 
             <PermissionsList title="Ações" itemHeaders={["Permitir"]}>
                 <PermissionItem
+                    description="Editar permissões"
+                    onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
+                    status={formik.values.permissions.editPermissions ? true : false}
+                />
+
+                {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
+                    <Text style={{ flex: 0.4 }}>Editar permissões</Text>
+
+                    <View style={{ flex: 0.6, alignItems: "center" }}>
+                        <Checkbox
+                            status={formik.values.permissions.editPermissions ? "checked" : "unchecked"}
+                            onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
+                        />
+                    </View>
+                </View> */}
+
+                <PermissionItem
                     description="Convidar usuário"
                     onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
                     status={formik.values.permissions.inviteUser ? true : false}
