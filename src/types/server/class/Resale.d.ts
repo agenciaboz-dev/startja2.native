@@ -2,7 +2,7 @@ import { Prisma } from "@prisma/client";
 import { Media } from "./Media";
 import { ResalePermissions, ResalePermissionsForm } from "./Permissions";
 import { FileUpload, WithoutFunctions } from "./helpers";
-import { UserForm } from "./User";
+import { User, UserForm } from "./User";
 export declare const resale_include: {
     permissions: true;
     profilePic: true;
@@ -23,10 +23,12 @@ export declare class Resale {
     profilePic: Media | null;
     created_at: string;
     constructor(id: string, data?: ResalePrima);
+    static findById(id: string): Promise<Resale | null>;
     static list(): Promise<Resale[]>;
     static new(form: ResaleForm): Promise<Resale>;
     load(data: ResalePrima): void;
     init(): Promise<void>;
     updateProfilePic(image: FileUpload): Promise<void>;
+    getManagers(): Promise<User[]>;
 }
 export {};

@@ -13,6 +13,7 @@ import * as Yup from "yup"
 import { validationErrors } from "../../tools/validationErrors"
 import { getFilename } from "../../tools/pickMedia"
 import { api } from "../../backend/api"
+import { manager_schema } from "../../schemas/manager_schema"
 
 interface ResaleFormModalProps {
     visible: boolean
@@ -27,11 +28,6 @@ export const ResaleFormModal: React.FC<ResaleFormModalProps> = ({ visible, onDis
     const [keyboardVisible, setKeyboardVisible] = useState(false)
     const [showResalePermissions, setShowResalePermissions] = useState(false)
     const [loading, setLoading] = useState(false)
-
-    const manager_schema = Yup.object().shape({
-        email: Yup.string().email("E-mail inválido").required(validationErrors.required),
-        name: Yup.string().required(validationErrors.required),
-    })
 
     const validation_schema = Yup.object().shape({
         name: Yup.string().required(validationErrors.required),
@@ -84,64 +80,65 @@ export const ResaleFormModal: React.FC<ResaleFormModalProps> = ({ visible, onDis
     }, [])
 
     return (
-        <Modal
-            visible={visible}
-            onDismiss={onDismiss}
-            contentContainerStyle={[
-                {
-                    backgroundColor: theme.colors.background,
-                    margin: 20,
-                    alignSelf: "center",
-                },
-                Platform.OS == "web" ? {} : { marginBottom: keyboardVisible ? 0 : undefined },
-            ]}
-        >
-            <ScrollView style={[{ flex: 1 }]} contentContainerStyle={[{ gap: 20, padding: 20 }]} keyboardShouldPersistTaps="handled">
-                <View style={[{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }]}>
-                    <Text style={[{ fontWeight: "bold", color: colors.grey }]}>Adicione uma revenda</Text>
-                    <IconButton icon={"close"} style={{ margin: 0 }} onPress={onDismiss} />
-                </View>
-
-                <Text style={[{ color: colors.grey, marginTop: -20 }]}>
-                    Por favor, forneça as seguintes informações. Não se preocupe, você sempre poderá alterar essas configurações mais tarde.
-                </Text>
-
-                <View style={[{ flexDirection: "row", alignItems: "center", gap: 20 }]}>
-                    <ProfilePicInput onPick={setProfilePic} profilePic={profilePic} />
-                    <View style={[{ flex: 1 }]}>
-                        <FormText formik={formik} name="name" label="Nome da revenda" placeholder="Revenda 1" />
+        <Portal>
+            <Modal
+                visible={visible}
+                onDismiss={onDismiss}
+                contentContainerStyle={[
+                    {
+                        backgroundColor: theme.colors.background,
+                        margin: 20,
+                        alignSelf: "center",
+                    },
+                    Platform.OS == "web" ? {} : { marginBottom: keyboardVisible ? 0 : undefined },
+                ]}
+            >
+                <ScrollView style={[{ flex: 1 }]} contentContainerStyle={[{ gap: 20, padding: 20 }]} keyboardShouldPersistTaps="handled">
+                    <View style={[{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }]}>
+                        <Text style={[{ fontWeight: "bold", color: colors.grey }]}>Adicione uma revenda</Text>
+                        <IconButton icon={"close"} style={{ margin: 0 }} onPress={onDismiss} />
                     </View>
-                </View>
 
-                <Text>
-                    Convide o usuário administrador da revenda. Não se preocupe, você sempre poderá alterar as permissões desse usuário mais tarde.
-                </Text>
+                    <Text style={[{ color: colors.grey, marginTop: -20 }]}>
+                        Por favor, forneça as seguintes informações. Não se preocupe, você sempre poderá alterar essas configurações mais tarde.
+                    </Text>
 
-                <FormText
-                    formik={formik}
-                    name="manager.email"
-                    keyboardType="email-address"
-                    autoCapitalize={"none"}
-                    label="E-mail"
-                    placeholder="joaozinho@gmail.com"
-                />
-                <FormText formik={formik} name="manager.name" label="Nome de usuário" placeholder="Joãozinho" />
+                    <View style={[{ flexDirection: "row", alignItems: "center", gap: 20 }]}>
+                        <ProfilePicInput onPick={setProfilePic} profilePic={profilePic} />
+                        <View style={[{ flex: 1 }]}>
+                            <FormText formik={formik} name="name" label="Nome da revenda" placeholder="Revenda 1" />
+                        </View>
+                    </View>
 
-                <Text style={{ fontWeight: "bold", color: colors.grey }}>Permissões usuário revenda</Text>
-                <Button style={{ alignSelf: "flex-start" }} mode="contained" onPress={() => setShowResalePermissions(true)}>
-                    Configurar permissões
-                </Button>
+                    <Text>
+                        Convide o usuário administrador da revenda. Não se preocupe, você sempre poderá alterar as permissões desse usuário mais
+                        tarde.
+                    </Text>
 
-                <TwoButtonsView>
-                    <Button mode="contained" onPress={() => formik.handleSubmit()} loading={loading}>
-                        Criar
+                    <FormText
+                        formik={formik}
+                        name="manager.email"
+                        keyboardType="email-address"
+                        autoCapitalize={"none"}
+                        label="E-mail"
+                        placeholder="joaozinho@gmail.com"
+                    />
+                    <FormText formik={formik} name="manager.name" label="Nome de usuário" placeholder="Joãozinho" />
+
+                    <Text style={{ fontWeight: "bold", color: colors.grey }}>Permissões usuário revenda</Text>
+                    <Button style={{ alignSelf: "flex-start" }} mode="contained" onPress={() => setShowResalePermissions(true)}>
+                        Configurar permissões
                     </Button>
-                </TwoButtonsView>
 
-                <Portal>
+                    <TwoButtonsView>
+                        <Button mode="contained" onPress={() => formik.handleSubmit()} loading={loading}>
+                            Criar
+                        </Button>
+                    </TwoButtonsView>
+
                     <ResalePermissionsModal visible={showResalePermissions} onDismiss={() => setShowResalePermissions(false)} formik={formik} />
-                </Portal>
-            </ScrollView>
-        </Modal>
+                </ScrollView>
+            </Modal>
+        </Portal>
     )
 }
