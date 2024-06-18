@@ -86,30 +86,32 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                 <PermissionItem description={"Tornar administrador da revenda"} status={is_admin} onPress={onAdminPress} />
             </PermissionsList>
 
-            <PermissionsList title="Nome" itemHeaders={permissions_data.map((item) => item.label)}>
-                {Object.entries(formik.values.permissions)
-                    .filter(([key, value]) => typeof value == "number")
-                    .map((item) => (
-                        // <PermissionItem key={item[0]} description={formatPermissionsLabel(item[0])} onPress={() => onCheckboxPress(item[0], permission.value)} status={hasPermission(permission.value, formik.values.permissions[item[0]]}  />
-                        <View
-                            key={item[0]}
-                            style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}
-                        >
-                            <Text style={{ flex: 0.4 }}>{formatPermissionsLabel(item[0])}</Text>
-                            <View style={[{ flexDirection: "row", gap: 30, flex: 0.6 }]}>
-                                {permissions_data.map((permission) => (
-                                    <View style={{ flex: 1, alignItems: "center" }} key={permission.value}>
-                                        <Checkbox
-                                            onPress={() => onCheckboxPress(item[0], permission.value)}
-                                            // @ts-ignore
-                                            status={hasPermission(permission.value, formik.values.permissions[item[0]]) ? "checked" : "unchecked"}
-                                        />
-                                    </View>
-                                ))}
+            {Platform.OS === "web" && (
+                <PermissionsList title="Nome" itemHeaders={permissions_data.map((item) => item.label)}>
+                    {Object.entries(formik.values.permissions)
+                        .filter(([key, value]) => typeof value == "number")
+                        .map((item) => (
+                            // <PermissionItem key={item[0]} description={formatPermissionsLabel(item[0])} onPress={() => onCheckboxPress(item[0], permission.value)} status={hasPermission(permission.value, formik.values.permissions[item[0]]}  />
+                            <View
+                                key={item[0]}
+                                style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}
+                            >
+                                <Text style={{ flex: 0.4 }}>{formatPermissionsLabel(item[0])}</Text>
+                                <View style={[{ flexDirection: "row", gap: 30, flex: 0.6 }]}>
+                                    {permissions_data.map((permission) => (
+                                        <View style={{ flex: 1, alignItems: "center" }} key={permission.value}>
+                                            <Checkbox
+                                                onPress={() => onCheckboxPress(item[0], permission.value)}
+                                                // @ts-ignore
+                                                status={hasPermission(permission.value, formik.values.permissions[item[0]]) ? "checked" : "unchecked"}
+                                            />
+                                        </View>
+                                    ))}
+                                </View>
                             </View>
-                        </View>
-                    ))}
-            </PermissionsList>
+                        ))}
+                </PermissionsList>
+            )}
 
             <PermissionsList title="Ações" itemHeaders={["Permitir"]}>
                 <PermissionItem
@@ -145,8 +147,6 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                         />
                     </View>
                 </View> */}
-
-                {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}></View> */}
             </PermissionsList>
 
             <TwoButtonsView>
