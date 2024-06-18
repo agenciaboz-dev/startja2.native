@@ -13,7 +13,12 @@ interface ResaleComponentProps {
 export const ResaleComponent: React.FC<ResaleComponentProps> = ({ resale, active, icon_size }) => {
     return (
         <TouchableRipple borderless style={{ borderRadius: 100 }}>
-            <Image source={resale.profilePic?.url} contentFit="cover" style={[{ height: icon_size, aspectRatio: 1, borderRadius: 100 }]} />
+            <Image
+                source={resale.profilePic?.url}
+                contentFit="cover"
+                style={[{ height: icon_size, aspectRatio: 1, borderRadius: 100 }]}
+                placeholder={require("../../../assets/icon.png")}
+            />
         </TouchableRipple>
     )
 }
