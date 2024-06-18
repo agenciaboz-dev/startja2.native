@@ -16,6 +16,7 @@ import { CodeVerification } from "./ForgotPassword/CodeVerification"
 import { ResetPasswordForm } from "./ForgotPassword/ResetPasswordForm"
 import { SuccessComponent } from "./ForgotPassword/SuccessComponent"
 import { HandleKeepSession } from "../../components/HandleKeepSession"
+import { AppInfo } from "../../components/AppInfo"
 
 interface HomeProps {}
 
@@ -38,6 +39,7 @@ const HomeComponent: React.FC = () => (
         <LoginComponent />
         <LinksComponent />
         {Platform.OS == "web" && <DistributionStores />}
+        <AppInfo />
         <HandleKeepSession />
     </>
 )
@@ -57,11 +59,11 @@ const HomeStack: React.FC = () => (
 export const Home: React.FC<HomeProps> = ({}) => {
     return Platform.OS == "web" ? (
         <View style={{ flex: 1, flexDirection: "row" }}>
-            <View style={{ flex: 0.4, padding: 50, gap: 20, paddingHorizontal: 150, paddingBottom: 50, overflow: "scroll" }}>
+            <View style={{ flex: 0.3, padding: 50, gap: 20, paddingHorizontal: 100, paddingBottom: 50, overflow: "scroll" }}>
                 <LogoComponent />
                 <HomeStack />
             </View>
-            <Image source={require("../../../assets/login_background.png")} style={{ flex: 1 }} />
+            <Image source={require("../../../assets/login_background.png")} style={{ flex: 0.7 }} />
         </View>
     ) : (
         <ScrollView
