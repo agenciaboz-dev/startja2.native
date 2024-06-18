@@ -42,7 +42,7 @@ export const PermissionItem: React.FC<PermissionItemProps> = ({ key, status, onP
         >
             <Text style={[{ flex: 0.4 }, textStyle]}>{description}</Text>
 
-            <View style={[{ flex: 0.093, alignItems: "center", borderColor: "#ff0000", borderWidth: 2 }, checkboxStyle]}>
+            <View style={[{ flex: 0.093, alignItems: "center" }, checkboxStyle]}>
                 <Checkbox status={status ? "checked" : "unchecked"} onPress={onPress} />
             </View>
         </View>

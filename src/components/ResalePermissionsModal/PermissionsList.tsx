@@ -24,8 +24,6 @@ export const PermissionsList: React.FC<PermissionsListProps> = ({ title, itemHea
                                 flex: itemHeaders.length == 1 ? 0.155 : 1,
                                 marginLeft: "auto",
                                 textAlign: "center",
-                                borderColor: "#ff0000",
-                                borderWidth: 2,
                             }}
                         >
                             {item}
