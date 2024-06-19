@@ -4,11 +4,11 @@ import { Resale } from "../../types/server/class/Resale"
 import { ResaleAccordion } from "./ResaleAccordion"
 import { TextInput } from "react-native-paper"
 
-interface CustomersContainerProps {
+interface CustomersAccordionProps {
     resale: Resale
 }
 
-export const CustomersContainer: React.FC<CustomersContainerProps> = ({ resale }) => {
+export const CustomersAccordion: React.FC<CustomersAccordionProps> = ({ resale }) => {
     const [searchValue, setSearchValue] = useState("")
 
     return (
