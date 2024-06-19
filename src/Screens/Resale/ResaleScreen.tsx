@@ -7,6 +7,7 @@ import { User } from "../../types/server/class"
 import { IconButton, Surface, Text } from "react-native-paper"
 import { colors } from "../../style/colors"
 import { ManagersContainer } from "./ManagersContainer"
+import { CustomersAccordion } from "./CustomersAccordion"
 
 interface ResaleScreenProps {
     route: RouteProp<any, any>
@@ -60,6 +61,7 @@ export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route }) => {
             </View>
 
             {resale && <ManagersContainer managers={managers} resale={resale} onAddManager={onAddManager} />}
+            {resale && <CustomersAccordion resale={resale} />}
         </Surface>
     )
 }

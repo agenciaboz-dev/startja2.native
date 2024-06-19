@@ -1,7 +1,8 @@
 import { Prisma } from "@prisma/client";
-import { CustomerPermissions } from "./Permissions";
+import { CustomerPermissions, CustomerPermissionsForm } from "./Permissions";
 import { Media } from "./Media";
-import { Address } from "./Address";
+import { Address, AddressForm } from "./Address";
+import { FileUpload, WithoutFunctions } from "./helpers";
 export declare const customer_include: {
     address: true;
     permissions: {
@@ -15,6 +16,12 @@ type CustomerPrisma = Prisma.CustomerGetPayload<{
     include: typeof customer_include;
 }>;
 export type FunruralType = "paycheck" | "production_value";
+export type CustomerForm = Omit<WithoutFunctions<Customer>, "id" | "certificate_file" | "address_id" | "permissionsId" | "managerId" | "profilePicId" | "profilePic" | "address" | "permissions"> & {
+    certificate_file?: FileUpload;
+    profilePic?: FileUpload;
+    address: AddressForm;
+    permissions: CustomerPermissionsForm;
+};
 export declare class Customer {
     id: string;
     document: string;
