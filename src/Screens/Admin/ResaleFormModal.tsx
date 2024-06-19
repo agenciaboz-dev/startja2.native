@@ -14,6 +14,7 @@ import { validationErrors } from "../../tools/validationErrors"
 import { getFilename } from "../../tools/pickMedia"
 import { api } from "../../backend/api"
 import { manager_schema } from "../../schemas/manager_schema"
+import { UserPermissionModal } from "../../components/ResalePermissionsModal/UserPermissionModal"
 
 interface ResaleFormModalProps {
     visible: boolean
@@ -27,6 +28,7 @@ export const ResaleFormModal: React.FC<ResaleFormModalProps> = ({ visible, onDis
     const [profilePic, setProfilePic] = useState<ImagePickerAsset | null>(null)
     const [keyboardVisible, setKeyboardVisible] = useState(false)
     const [showResalePermissions, setShowResalePermissions] = useState(false)
+    const [showUserPermissions, setShowUserPermissions] = useState(false)
     const [loading, setLoading] = useState(false)
 
     const validation_schema = Yup.object().shape({
@@ -130,6 +132,11 @@ export const ResaleFormModal: React.FC<ResaleFormModalProps> = ({ visible, onDis
                         Configurar permissões
                     </Button>
 
+                    <Text style={{ fontWeight: "bold", color: colors.grey }}>Permissões usuário cliente</Text>
+                    <Button style={{ alignSelf: "flex-start" }} mode="contained" onPress={() => setShowUserPermissions(true)}>
+                        Configurar permissões
+                    </Button>
+
                     <TwoButtonsView>
                         <Button mode="contained" onPress={() => formik.handleSubmit()} loading={loading}>
                             Criar
@@ -137,6 +144,7 @@ export const ResaleFormModal: React.FC<ResaleFormModalProps> = ({ visible, onDis
                     </TwoButtonsView>
 
                     <ResalePermissionsModal visible={showResalePermissions} onDismiss={() => setShowResalePermissions(false)} formik={formik} />
+                    <UserPermissionModal visible={showUserPermissions} onDismiss={() => setShowUserPermissions(false)} />
                 </ScrollView>
             </Modal>
         </Portal>
