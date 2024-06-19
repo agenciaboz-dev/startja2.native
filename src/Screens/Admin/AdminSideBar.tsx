@@ -77,11 +77,13 @@ export const AdminSideBar: React.FC<AdminSideBarProps> = ({}) => {
                 contentContainerStyle={[{ gap: 20 }]}
                 ListHeaderComponent={
                     <View style={[{ alignItems: "center", gap: 20 }, Platform.OS !== "web" && { flexDirection: "row" }]}>
-                        <Image
-                            source={require("../../../assets/icon.png")}
-                            contentFit="contain"
-                            style={[{ borderRadius: 100, height: icon_size, aspectRatio: 1 }]}
-                        />
+                        <Surface style={{ borderRadius: 100 }}>
+                            <Image
+                                source={require("../../../assets/icon.png")}
+                                contentFit="contain"
+                                style={[{ borderRadius: 100, height: icon_size, aspectRatio: 1 }]}
+                            />
+                        </Surface>
 
                         <View
                             style={[

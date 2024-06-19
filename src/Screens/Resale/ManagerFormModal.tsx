@@ -10,8 +10,9 @@ import { manager_schema } from "../../schemas/manager_schema"
 import { ResaleUserForm } from "../../types/server/class/ResaleUser"
 import * as Yup from "yup"
 import { ResalePermissionsModal } from "../../components/ResalePermissionsModal/ResalePermissionsModal"
-import { api } from "../../backend/api"
+import { api, handleError } from "../../backend/api"
 import { User } from "../../types/server/class"
+import { AxiosError } from "axios"
 
 interface ManagerFormModalProps {
     visible: boolean
@@ -41,7 +42,9 @@ export const ManagerFormModal: React.FC<ManagerFormModalProps> = ({ visible, onD
                 onFinish(response.data)
                 onDismiss()
             } catch (error) {
-                console.log(error)
+                handleError(error, (message) => {
+                    formik.setFieldError("user.email", message)
+                })
             } finally {
                 setLoading(false)
             }
