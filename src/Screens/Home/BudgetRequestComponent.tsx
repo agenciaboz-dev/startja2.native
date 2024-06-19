@@ -58,7 +58,12 @@ export const BudgetRequestComponent: React.FC<BudgetRequestComponentProps> = ({}
     })
 
     return (
-        <View style={[{ gap: 20, borderTopColor: theme.colors.outlineVariant, borderTopWidth: 1 }, Platform.OS != "web" && { gap: 10 }]}>
+        <View
+            style={[
+                { gap: 20, borderTopColor: theme.colors.outlineVariant, borderTopWidth: 1, paddingBottom: 50 },
+                Platform.OS != "web" && { gap: 10 },
+            ]}
+        >
             <Text
                 style={[{ color: colors.grey, paddingTop: 20 }, Platform.OS == "web" ? { fontWeight: "bold" } : { alignSelf: "center" }]}
                 variant={Platform.OS == "web" ? "bodyLarge" : "titleLarge"}
