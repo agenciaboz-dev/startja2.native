@@ -19,6 +19,7 @@ export declare class ResalePermissions {
     constructor(data: ResalePermissionsPrisma);
     static new(form: ResalePermissionsForm): Promise<ResalePermissions>;
 }
+export type NfePermissionsForm = Omit<WithoutFunctions<NfePermissions>, "id">;
 export declare class NfePermissions {
     id: number;
     emit: boolean;
@@ -37,6 +38,9 @@ export declare class NfePermissions {
     save_view: boolean;
     constructor(data: NfePermissionsPrisma);
 }
+export type CustomerPermissionsForm = Omit<WithoutFunctions<CustomerPermissions>, "id" | "nfePermissionsId" | "nfePermissions"> & {
+    nfePermissions: NfePermissionsForm;
+};
 export declare class CustomerPermissions {
     id: number;
     enterprises: number;
