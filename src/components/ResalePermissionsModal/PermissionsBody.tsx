@@ -3,7 +3,7 @@ import { Platform, StyleProp, TextStyle, View, ViewStyle } from "react-native"
 import { Checkbox, Surface, Text, useTheme } from "react-native-paper"
 import { useUser } from "../../hooks/useUser"
 
-interface PermissionItemProps {
+interface PermissionsBodyProps {
     key?: React.Key | null | undefined
     description: string
     status: boolean
@@ -24,7 +24,7 @@ interface PermissionItemProps {
 </View> */
 }
 
-export const PermissionItem: React.FC<PermissionItemProps> = ({ key, status, onPress, wrapperStyle, textStyle, checkboxStyle, description }) => {
+export const PermissionsBody: React.FC<PermissionsBodyProps> = ({ key, status, onPress, wrapperStyle, textStyle, checkboxStyle, description }) => {
     const theme = useTheme()
 
     return (
