@@ -17,7 +17,7 @@ export const PermissionsList: React.FC<PermissionsListProps> = ({ title, itemHea
             <View
                 style={[
                     { backgroundColor: theme.colors.elevation.level1, flexDirection: "row", justifyContent: "space-between", padding: 20 },
-                    Platform.OS !== "web" && { paddingHorizontal: 15, borderColor: "#ff0000", borderWidth: 1 },
+                    Platform.OS !== "web" && { paddingHorizontal: 15 },
                 ]}
             >
                 <Text style={[Platform.OS == "web" && { flex: 0.4 }]}>{title}</Text>
@@ -29,8 +29,6 @@ export const PermissionsList: React.FC<PermissionsListProps> = ({ title, itemHea
                                 {
                                     marginLeft: "auto",
                                     textAlign: "center",
-                                    borderColor: "#ff0000",
-                                    borderWidth: 1,
                                 },
                                 Platform.OS == "web" && {
                                     flex: itemHeaders.length == 1 ? 0.155 : 1,
