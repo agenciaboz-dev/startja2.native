@@ -5,6 +5,7 @@ import { colors } from "../../style/colors"
 import { useResale } from "../../hooks/useResale"
 import { Resale } from "../../types/server/class/Resale"
 import { ResaleCard } from "./ResaleCard"
+import { useLinkTo } from "@react-navigation/native"
 
 interface ResaleListModalProps {
     visible: boolean
@@ -14,9 +15,11 @@ interface ResaleListModalProps {
 export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDismiss }) => {
     const theme = useTheme()
     const { fetchAllResales } = useResale()
+    const linkTo = useLinkTo()
 
     const [loading, setLoading] = useState(false)
     const [resales, setResales] = useState<Resale[]>([])
+    const [selectedResale, setSelectedResale] = useState<Resale>()
 
     const fetchResales = async () => {
         setLoading(true)
@@ -30,6 +33,17 @@ export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDis
             setLoading(false)
         }
     }
+
+    const onSelectResale = (resale: Resale) => {
+        setSelectedResale(resale)
+        onDismiss()
+    }
+
+    useEffect(() => {
+        if (selectedResale) {
+            linkTo(`/admin?resale=${selectedResale.id}`)
+        }
+    }, [selectedResale])
 
     useEffect(() => {
         fetchResales()
@@ -69,9 +83,14 @@ export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDis
                             <IconButton icon="swap-vertical" iconColor={theme.colors.primary} />
                         </View>
                     </View>
-                    {resales.map((resale) => (
-                        <ResaleCard resale={resale} />
-                    ))}
+                    <View style={[{ gap: 10 }]}>
+                        <Text style={{ color: colors.dark }}>Revendas</Text>
+                        <View style={[{ gap: 5 }]}>
+                            {resales.map((resale) => (
+                                <ResaleCard resale={resale} onPress={onSelectResale} />
+                            ))}
+                        </View>
+                    </View>
                 </View>
             </Modal>
         </Portal>

@@ -6,12 +6,12 @@ import { Resale } from "../../types/server/class/Resale"
 
 interface ResaleCardProps {
     resale: Resale
+    onPress: (resale: Resale) => void
 }
 
-export const ResaleCard: React.FC<ResaleCardProps> = ({ resale }) => {
+export const ResaleCard: React.FC<ResaleCardProps> = ({ resale, onPress }) => {
     return (
         <View>
-            <Text>{resale.name}</Text>
             <View
                 style={[
                     {
@@ -24,8 +24,8 @@ export const ResaleCard: React.FC<ResaleCardProps> = ({ resale }) => {
                     },
                 ]}
             >
-                <Text>[Cliente]</Text>
-                <Button>Acessar</Button>
+                <Text>{resale.name}</Text>
+                <Button onPress={() => onPress(resale)}>Acessar</Button>
             </View>
         </View>
     )
