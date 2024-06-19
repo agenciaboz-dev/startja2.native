@@ -48,6 +48,7 @@ export const ManagerFormModal: React.FC<ManagerFormModalProps> = ({ visible, onD
         },
         validationSchema: Yup.object().shape({ user: manager_schema }),
         validateOnChange: false,
+        enableReinitialize: true,
     })
 
     return (
