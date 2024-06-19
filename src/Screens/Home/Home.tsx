@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Platform, Pressable, ScrollView, View } from "react-native"
+import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native"
 import { Text } from "react-native-paper"
 import { Logo } from "../../components/Logo"
 import { Image } from "expo-image"
@@ -51,13 +51,17 @@ const HomeComponent: React.FC<{ route: RouteProp<any, any> }> = ({ route }) => {
     }, [])
 
     return (
-        <>
+        <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+        >
             <LoginComponent email={email} password={password} />
             <LinksComponent />
             {Platform.OS == "web" && <DistributionStores />}
             <AppInfo />
             <HandleKeepSession />
-        </>
+        </KeyboardAvoidingView>
     )
 }
 
