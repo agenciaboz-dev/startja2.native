@@ -5,6 +5,7 @@ import { Text } from "react-native-paper"
 import { ManagerFormModal } from "./ManagerFormModal"
 import { Resale } from "../../types/server/class/Resale"
 import { ResaleAccordion } from "./ResaleAccordion"
+import { CustomersContainer } from "./CustomersContainer"
 
 interface ManagersContainerProps {
     managers: User[]
@@ -30,6 +31,7 @@ export const ManagersContainer: React.FC<ManagersContainerProps> = ({ managers, 
                     </Text>
                 ))}
             </ResaleAccordion>
+            <CustomersContainer resale={resale} />
         </View>
     )
 }
