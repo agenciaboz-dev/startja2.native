@@ -2,12 +2,12 @@ import React from "react"
 import { Platform, View } from "react-native"
 import { Button, Checkbox, IconButton, Modal, Portal, Text, useTheme } from "react-native-paper"
 import { colors } from "../../style/colors"
-import { PermissionsList } from "./PermissionsList"
+import { PermissionsHeader } from "./PermissionsHeader"
 import { FormikErrors, FormikTouched } from "formik"
 import { formatPermissionsLabel } from "../../tools/formatPermissionsLabel"
 import { hasPermission } from "../../tools/hasPermission"
 import { TwoButtonsView } from "../TwoButtonsView"
-import { PermissionItem } from "./PermissionItem"
+import { PermissionsBody } from "./PermissionsBody"
 import { ResalePermissionsForm } from "../../types/server/class/Permissions"
 
 interface WithPermissions {
@@ -87,12 +87,14 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                     <IconButton icon={"close"} style={{ margin: 0 }} onPress={onDismiss} />
                 </View>
 
-                <PermissionsList title="Admin" itemHeaders={["Permitir"]}>
-                    <PermissionItem description={"Tornar administrador da revenda"} status={is_admin} onPress={onAdminPress} />
-                </PermissionsList>
+                <View>
+                    <PermissionsHeader title="Admin" headers={["Permitir"]} />
+                    <PermissionsBody description={"Tornar administrador da revenda"} status={is_admin} onPress={onAdminPress} />
+                </View>
 
                 {Platform.OS === "web" && (
-                    <PermissionsList title="Nome" itemHeaders={permissions_data.map((item) => item.label)}>
+                    <View>
+                        <PermissionsHeader title="Nome" headers={permissions_data.map((item) => item.label)} />
                         {Object.entries(formik.values.permissions)
                             .filter(([key, value]) => typeof value == "number")
                             .map((item) => (
@@ -117,7 +119,7 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                                     </View>
                                 </View>
                             ))}
-                    </PermissionsList>
+                    </View>
                 )}
 
                 {Platform.OS !== "web" && (
@@ -153,41 +155,37 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                     </View>
                 )}
 
-                <PermissionsList title="Ações" itemHeaders={["Permitir"]}>
-                    <PermissionItem
+                <View>
+                    <PermissionsHeader title="Ações" headers={["Permitir"]} />
+                    <PermissionsBody
                         description="Editar permissões"
                         onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
                         status={formik.values.permissions.editPermissions ? true : false}
                     />
-
                     {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
-                <Text style={{ flex: 0.4 }}>Editar permissões</Text>
-
-                <View style={{ flex: 0.6, alignItems: "center" }}>
-                    <Checkbox
-                        status={formik.values.permissions.editPermissions ? "checked" : "unchecked"}
-                        onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
-                    />
-                </View>
-            </View> */}
-
-                    <PermissionItem
+                    <Text style={{ flex: 0.4 }}>Editar permissões</Text>
+                    <View style={{ flex: 0.6, alignItems: "center" }}>
+                        <Checkbox
+                            status={formik.values.permissions.editPermissions ? "checked" : "unchecked"}
+                            onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
+                        />
+                    </View>
+                                </View> */}
+                    <PermissionsBody
                         description="Convidar usuário"
                         onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
                         status={formik.values.permissions.inviteUser ? true : false}
                     />
-
                     {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
-                <Text style={{ flex: 0.4 }}>Convidar usuário</Text>
-
-                <View style={{ flex: 0.6, alignItems: "center" }}>
-                    <Checkbox
-                        status={formik.values.permissions.inviteUser ? "checked" : "unchecked"}
-                        onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
-                    />
+                    <Text style={{ flex: 0.4 }}>Convidar usuário</Text>
+                    <View style={{ flex: 0.6, alignItems: "center" }}>
+                        <Checkbox
+                            status={formik.values.permissions.inviteUser ? "checked" : "unchecked"}
+                            onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
+                        />
+                    </View>
+                                </View> */}
                 </View>
-            </View> */}
-                </PermissionsList>
 
                 <TwoButtonsView>
                     <Button mode="contained" onPress={onDismiss}>
