@@ -1,7 +1,7 @@
 import React from "react"
 import { View } from "react-native"
 import { Resale } from "../../types/server/class/Resale"
-import { TouchableRipple } from "react-native-paper"
+import { Surface, TouchableRipple } from "react-native-paper"
 import { Image } from "expo-image"
 import { ActiveIndicator } from "./ActiveIndicator"
 import { colors } from "../../style/colors"
@@ -15,8 +15,8 @@ interface ResaleComponentProps {
 
 export const ResaleComponent: React.FC<ResaleComponentProps> = ({ resale, active, icon_size, onPress }) => {
     return (
-        <View style={[{ position: "relative" }]}>
-            <TouchableRipple borderless style={[{ borderRadius: 100 }, active && { borderRadius: 20 }]} onPress={() => onPress(resale)}>
+        <TouchableRipple borderless style={[{ borderRadius: 100 }, active && { borderRadius: 20 }]} onPress={() => onPress(resale)}>
+            <Surface style={{ borderRadius: 100 }}>
                 <Image
                     source={resale.profilePic?.url}
                     contentFit="cover"
@@ -26,8 +26,7 @@ export const ResaleComponent: React.FC<ResaleComponentProps> = ({ resale, active
                     ]}
                     placeholder={require("../../../assets/icon.png")}
                 />
-            </TouchableRipple>
-            {/* {active && <ActiveIndicator size={icon_size} />} */}
-        </View>
+            </Surface>
+        </TouchableRipple>
     )
 }

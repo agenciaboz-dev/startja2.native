@@ -43,13 +43,7 @@ export const PermissionItem: React.FC<PermissionItemProps> = ({ key, status, onP
         >
             <Text style={[Platform.OS == "web" && { flex: 0.4 }, Platform.OS !== "web" && { flex: 1 }, textStyle]}>{description}</Text>
 
-            <View
-                style={[
-                    { flex: 0.093, alignItems: "center" },
-                    Platform.OS !== "web" && { flex: 0.23, borderColor: "#ff0000", borderWidth: 1 },
-                    checkboxStyle,
-                ]}
-            >
+            <View style={[{ flex: 0.093, alignItems: "center" }, Platform.OS !== "web" && { flex: 0.23 }, checkboxStyle]}>
                 <Checkbox status={status ? "checked" : "unchecked"} onPress={onPress} />
             </View>
         </View>
