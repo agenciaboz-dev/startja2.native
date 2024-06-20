@@ -9,8 +9,11 @@ export const SystemContainer: React.FC<SystemComponentProp> = ({ name, route }) 
     const linkTo = useLinkTo()
 
     const onPress = () => {
-        linkTo(route)
+        // linkTo(route)
+        linkTo(`/admin?resale=${route}`)
     }
+
+    console.log({ Rota: route })
 
     return (
         <View
