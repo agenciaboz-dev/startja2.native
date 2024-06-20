@@ -122,7 +122,7 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                     </View>
                 )}
 
-                {Platform.OS !== "web" && (
+                {/* {Platform.OS !== "web" && (
                     <View>
                         <View style={[{ gap: 15 }]}>
                             {Object.entries(formik.values.permissions)
@@ -153,7 +153,7 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                                 ))}
                         </View>
                     </View>
-                )}
+                )} */}
 
                 <View>
                     <PermissionsHeader title="Ações" headers={["Permitir"]} />
