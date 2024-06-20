@@ -11,22 +11,20 @@ interface ResaleCardProps {
 
 export const ResaleCard: React.FC<ResaleCardProps> = ({ resale, onPress }) => {
     return (
-        <View>
-            <View
-                style={[
-                    {
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        backgroundColor: colors.disabled,
-                        paddingLeft: 10,
-                        borderRadius: 5,
-                    },
-                ]}
-            >
-                <Text>{resale.name}</Text>
-                <Button onPress={() => onPress(resale)}>Acessar</Button>
-            </View>
+        <View
+            style={[
+                {
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    backgroundColor: colors.disabled,
+                    paddingLeft: 10,
+                    borderRadius: 5,
+                },
+            ]}
+        >
+            <Text>{resale.name}</Text>
+            <Button onPress={() => onPress(resale)}>Acessar</Button>
         </View>
     )
 }

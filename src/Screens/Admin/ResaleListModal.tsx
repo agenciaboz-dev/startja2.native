@@ -54,12 +54,21 @@ export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDis
             <Modal
                 visible={visible}
                 onDismiss={onDismiss}
-                style={{
+                style={[{
                     marginTop: 200,
                     marginLeft: 145,
                     height: 70,
                     width: 470,
-                }}
+                },
+                Platform.OS !== "web" &&
+                    {
+                        marginTop: "25%",
+                        marginLeft: 10,
+                        marginRight: 10,
+                        height: "auto",
+                        width: "auto"
+                    }
+            ]}
                 contentContainerStyle={[
                     {
                         borderRadius: 15,
