@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native"
+import { Keyboard, KeyboardAvoidingView, Platform, Pressable, ScrollView, View } from "react-native"
 import { Text } from "react-native-paper"
 import { Logo } from "../../components/Logo"
 import { Image } from "expo-image"
@@ -50,6 +50,22 @@ const HomeComponent: React.FC<{ route: RouteProp<any, any> }> = ({ route }) => {
         }
     }, [])
 
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false)
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener("keyboardDidShow", () => {
+            setKeyboardVisible(true)
+        })
+        const keyboardDidHideListener = Keyboard.addListener("keyboardDidHide", () => {
+            setKeyboardVisible(false)
+        })
+
+        return () => {
+            keyboardDidShowListener.remove()
+            keyboardDidHideListener.remove()
+        }
+    }, [])
+
     return (
         <KeyboardAvoidingView
             style={{ flex: 1 }}
@@ -57,9 +73,9 @@ const HomeComponent: React.FC<{ route: RouteProp<any, any> }> = ({ route }) => {
             keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
         >
             <LoginComponent email={email} password={password} />
-            <LinksComponent />
-            {Platform.OS == "web" && <DistributionStores />}
-            <AppInfo />
+            {!isKeyboardVisible && <LinksComponent />}
+            {Platform.OS === "web" && <DistributionStores />}
+            {!isKeyboardVisible && <AppInfo />}
             <HandleKeepSession />
         </KeyboardAvoidingView>
     )
