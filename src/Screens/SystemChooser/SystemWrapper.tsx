@@ -1,9 +1,12 @@
 import React, { useState } from "react"
-import { LayoutAnimation, View } from "react-native"
+import { LayoutAnimation, StyleProp, View, ViewStyle } from "react-native"
 import { SystemComponentProp } from "../../types/SystemComponentProp"
 import { Button, List, Surface, Text, useTheme } from "react-native-paper"
 import { SystemContainer } from "./SystemContainer"
 import { colors } from "../../style/colors"
+import { Style } from "react-native-paper/lib/typescript/components/List/utils"
+import { SearchComponent } from "../../components/Tools/SearchComponent"
+import { SortComponent } from "../../components/Tools/SortComponent"
 
 interface SystemWrapperProps {
     name: string
@@ -29,8 +32,15 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
                         {systems.length > 1 && <View style={[{ flexDirection: "row" }]}></View>}
                     </View>
                 }
+                right={() => (
+                    <View style={{ flexDirection: "row", gap: 10 }}>
+                        <SearchComponent placeholder="Procurar por nome" />
+                        <SortComponent title="Ordenar" />
+                    </View>
+                )}
                 expanded={expanded}
                 onPress={onAccordionPress}
+                style={{}}
             >
                 <Surface style={[{ padding: 20 }]}>
                     {systems.map((item) => (
