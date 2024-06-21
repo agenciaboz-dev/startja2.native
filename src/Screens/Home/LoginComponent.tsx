@@ -48,7 +48,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({ email, password 
                     onLogin(user)
                 } else {
                     formikHelpers.setFieldError("login", " ")
-                    formikHelpers.setFieldError("password", "Nenhum usuário encontrado")
+                    formikHelpers.setFieldError("password", "Usuário ou senha incorretos")
                 }
             } catch (error) {
                 console.log(error)
@@ -83,6 +83,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({ email, password 
                 autoCapitalize={"none"}
                 placeholder="Digite seu endereço de e-mail"
                 onSubmitEditing={() => password_ref.current?.focus()}
+                right={<Input.Icon icon={""} />}
             />
             <FormText
                 ref={password_ref}
