@@ -9,7 +9,7 @@ import { colors } from "../../style/colors"
 import { ManagersContainer } from "./ManagersContainer"
 import { CustomersAccordion } from "./CustomersAccordion"
 import { ResaleListModal } from "../Admin/ResaleListModal"
-import { SettingsCard } from "../Settings/SettingsCard"
+import { ProfileCard } from "../Settings/ProfileCard"
 
 interface ResaleScreenProps {
     route: RouteProp<any, any>
@@ -66,7 +66,7 @@ export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route }) => {
             </View>
             {resale && <ManagersContainer managers={managers} resale={resale} onAddManager={onAddManager} />}
             {resale && <CustomersAccordion resale={resale} />}
-            {/* <SettingsCard /> */}
+            <ProfileCard />
             <ResaleListModal visible={resaleListModalOpen} onDismiss={() => setResaleListModalOpen(false)} />
         </Surface>
     )
