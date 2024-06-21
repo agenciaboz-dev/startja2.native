@@ -15,6 +15,8 @@ export const SearchComponent: React.FC<SearchComponentProps> = ({ placeholder = 
             // onChangeText={(text) => setSearchValue(text)}
             right={<TextInput.Icon icon="magnify" />}
             style={[{ flex: 1 }]}
+            // onChange={(e) => console.log(e.target.value)}
+            onPress={() => console.log("clicando no searchField")}
         />
     )
 }
