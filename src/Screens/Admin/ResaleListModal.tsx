@@ -91,7 +91,7 @@ export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDis
                             style={[{ flex: 1 }]}
                         /> */}
                         <SearchComponent />
-                        <SortComponent style={{}} />
+                        <SortComponent />
                         {/* <View style={[{ borderColor: colors.grey, borderWidth: 1, borderRadius: 5 }]}>
                             <IconButton icon="swap-vertical" iconColor={theme.colors.primary} />
                         </View> */}
