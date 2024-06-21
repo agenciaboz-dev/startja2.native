@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { FlatList, View } from "react-native"
+import { FlatList, View, ScrollView } from "react-native"
 import { Resale } from "../../types/server/class/Resale"
 import { ResaleAccordion } from "./ResaleAccordion"
 import { TextInput } from "react-native-paper"
@@ -29,13 +29,15 @@ export const CustomersAccordion: React.FC<CustomersAccordionProps> = ({ resale }
                         value={searchValue}
                         onChangeText={(text) => setSearchValue(text)}
                     />
-                    <FlatList
-                        data={[1, 2, 3, 4, 5]}
-                        renderItem={({ item }) => <CustomerComponent />}
-                        keyExtractor={(item) => item.toString()}
-                        style={{ margin: -20 }}
-                        contentContainerStyle={[{ padding: 20, gap: 20 }]}
-                    />
+                    <ScrollView style={{ maxHeight: 600 }}>
+                        <FlatList
+                            data={[1, 2, 3, 4, 5]}
+                            renderItem={({ item }) => <CustomerComponent />}
+                            keyExtractor={(item) => item.toString()}
+                            style={{ margin: -20 }}
+                            contentContainerStyle={[{ padding: 20, gap: 20 }]}
+                        />
+                    </ScrollView>
                 </View>
             </ResaleAccordion>
         </View>
