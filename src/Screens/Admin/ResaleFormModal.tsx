@@ -123,9 +123,9 @@ export const ResaleFormModal: React.FC<ResaleFormModalProps> = ({ visible, onDis
                         keyboardType="email-address"
                         autoCapitalize={"none"}
                         label="E-mail"
-                        placeholder="joaozinho@gmail.com"
+                        placeholder="usuario@email.com"
                     />
-                    <FormText formik={formik} name="manager.name" label="Nome de usuário" placeholder="Joãozinho" />
+                    <FormText formik={formik} name="manager.name" label="Nome de usuário" placeholder="Nome de usuário" />
 
                     <Text style={{ fontWeight: "bold", color: colors.grey }}>Permissões usuário revenda</Text>
                     <Button style={{ alignSelf: "flex-start" }} mode="contained" onPress={() => setShowResalePermissions(true)}>
