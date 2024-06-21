@@ -1,8 +1,10 @@
 import React from "react"
-import { Surface } from "react-native-paper"
+import { Button, IconButton, Surface } from "react-native-paper"
 
-interface ExpandButtonProps {}
+interface ExpandButtonProps {
+    onPress: () => void
+}
 
-export const ExpandButton: React.FC<ExpandButtonProps> = ({}) => {
-    return <Surface style={{ flex: 1 }}>teste</Surface>
+export const ExpandButton: React.FC<ExpandButtonProps> = ({ onPress }) => {
+    return <IconButton icon="chevron-up" style={{}} onPress={onPress} />
 }
