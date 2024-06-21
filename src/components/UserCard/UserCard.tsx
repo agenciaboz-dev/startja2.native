@@ -4,6 +4,7 @@ import { useUser } from "../../hooks/useUser"
 import { Surface } from "react-native-paper"
 import { Image } from "expo-image"
 import { UserData } from "./UserData"
+import placeholders from "../Tools/placeholders"
 
 interface UserCardProps {}
 
@@ -17,7 +18,7 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
                     source={user.profilePic?.url}
                     contentFit="cover"
                     style={{ width: 100, height: 100, borderRadius: 100 }}
-                    placeholder={require("../../../assets/placeholders/profile.png")}
+                    placeholder={user.admin ? placeholders.admin : placeholders.user}
                     placeholderContentFit="cover"
                 />
                 {Platform.OS !== "web" && <UserData title="NOME DE USUÁRIO" value={user.name} />}

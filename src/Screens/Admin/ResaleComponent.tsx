@@ -5,6 +5,7 @@ import { Surface, TouchableRipple } from "react-native-paper"
 import { Image } from "expo-image"
 import { ActiveIndicator } from "./ActiveIndicator"
 import { colors } from "../../style/colors"
+import placeholders from "../../components/Tools/placeholders"
 
 interface ResaleComponentProps {
     resale: Resale
@@ -24,7 +25,7 @@ export const ResaleComponent: React.FC<ResaleComponentProps> = ({ resale, active
                         { height: icon_size, aspectRatio: 1, borderRadius: 100 },
                         active && { borderWidth: 3, borderColor: colors.primary, borderRadius: 20 },
                     ]}
-                    placeholder={require("../../../assets/icon.png")}
+                    placeholder={placeholders.resale}
                 />
             </Surface>
         </TouchableRipple>
