@@ -6,6 +6,8 @@ import { useResale } from "../../hooks/useResale"
 import { Resale } from "../../types/server/class/Resale"
 import { ResaleCard } from "./ResaleCard"
 import { useLinkTo } from "@react-navigation/native"
+import { SearchComponent } from "../../components/Tools/SearchComponent"
+import { SortComponent } from "../../components/Tools/SortComponent"
 
 interface ResaleListModalProps {
     visible: boolean
@@ -54,21 +56,21 @@ export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDis
             <Modal
                 visible={visible}
                 onDismiss={onDismiss}
-                style={[{
-                    marginTop: 200,
-                    marginLeft: 145,
-                    height: 70,
-                    width: 470,
-                },
-                Platform.OS !== "web" &&
+                style={[
                     {
+                        marginTop: 200,
+                        marginLeft: 145,
+                        height: 70,
+                        width: 470,
+                    },
+                    Platform.OS !== "web" && {
                         marginTop: "25%",
                         marginLeft: 10,
                         marginRight: 10,
                         height: "auto",
-                        width: "auto"
-                    }
-            ]}
+                        width: "auto",
+                    },
+                ]}
                 contentContainerStyle={[
                     {
                         borderRadius: 15,
@@ -79,18 +81,20 @@ export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDis
             >
                 <View style={{ padding: 20, gap: 20, borderRadius: 15 }}>
                     <View style={{ flexDirection: "row", gap: 10 }}>
-                        <TextInput
+                        {/* <TextInput
                             mode="outlined"
                             dense
                             placeholder="Procurar por nome, CPF, CNPJ, email..."
-                            // value={searchValue}
-                            // onChangeText={(text) => setSearchValue(text)}
+                            value={searchValue}
+                            onChangeText={(text) => setSearchValue(text)}
                             right={<TextInput.Icon icon="magnify" />}
                             style={[{ flex: 1 }]}
-                        />
-                        <View style={[{ borderColor: colors.grey, borderWidth: 1, borderRadius: 5 }]}>
+                        /> */}
+                        <SearchComponent />
+                        <SortComponent style={{}} />
+                        {/* <View style={[{ borderColor: colors.grey, borderWidth: 1, borderRadius: 5 }]}>
                             <IconButton icon="swap-vertical" iconColor={theme.colors.primary} />
-                        </View>
+                        </View> */}
                     </View>
                     <View style={[{ gap: 10 }]}>
                         <Text style={{ color: colors.dark }}>Revendas</Text>
