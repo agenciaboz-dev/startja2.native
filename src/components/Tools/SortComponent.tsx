@@ -1,6 +1,6 @@
 import React from "react"
 import { StyleProp, View, ViewStyle } from "react-native"
-import { IconButton, Surface, Text } from "react-native-paper"
+import { Button, Icon, IconButton, Surface, Text, useTheme } from "react-native-paper"
 import { colors } from "../../style/colors"
 
 interface SortComponentProps {
@@ -9,10 +9,32 @@ interface SortComponentProps {
 }
 
 export const SortComponent: React.FC<SortComponentProps> = ({ title, style }) => {
-    return (
-        <View style={[{ borderColor: colors.grey, borderWidth: 1, borderRadius: 5, flexDirection: "row", alignItems: "center" }, style]}>
-            <IconButton icon="swap-vertical" iconColor={colors.primary} style={style} />
-            {title && <Text style={{ color: colors.primary, fontSize: 16, marginLeft: -15 }}>{title}</Text>}
-        </View>
+    return title ? (
+        <Button
+            icon="swap-vertical"
+            onPress={() => console.log("clicou no sort")}
+            style={[
+                {
+                    borderColor: colors.grey,
+                    borderWidth: 1,
+                    borderRadius: 5,
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "center",
+                },
+                style,
+            ]}
+        >
+            {title}
+        </Button>
+    ) : (
+        <IconButton
+            icon="swap-vertical"
+            iconColor={colors.primary}
+            style={{ borderColor: colors.grey, borderWidth: 1, borderRadius: 5 }}
+            onPress={() => console.log("clicou no sort")}
+        />
     )
 }
+
+
