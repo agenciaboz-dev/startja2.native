@@ -7,6 +7,7 @@ import { colors } from "../../style/colors"
 import { Style } from "react-native-paper/lib/typescript/components/List/utils"
 import { SearchComponent } from "../../components/Tools/SearchComponent"
 import { SortComponent } from "../../components/Tools/SortComponent"
+import { ExpandButton } from "../../components/Tools/ExpandButton"
 
 interface SystemWrapperProps {
     name: string
@@ -35,11 +36,12 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
                 right={() => (
                     <View style={{ flexDirection: "row", gap: 10 }}>
                         <SearchComponent placeholder="Procurar por nome" />
-                        <SortComponent title="Ordenar" />
+                        <SortComponent title="Ordenar" style={{ paddingRight: 10 }} />
+                        <ExpandButton onPress={onAccordionPress} />
                     </View>
                 )}
                 expanded={expanded}
-                onPress={onAccordionPress}
+                // onPress={onAccordionPress}
                 style={{}}
             >
                 <Surface style={[{ padding: 20 }]}>
