@@ -6,6 +6,7 @@ import { Home } from "./Screens/Home/Home"
 import { NotFound } from "./Screens/NotFound"
 import { SystemChooser } from "./Screens/SystemChooser/SystemChooser"
 import { AdminScreen } from "./Screens/Admin/AdminScreen"
+import { Profile } from "./Screens/Profile/Profile"
 
 interface RoutesProps {}
 
@@ -14,6 +15,7 @@ export type HomeStackParams = {
     notfound: undefined
     systemChooser: undefined
     admin: undefined
+    profile: undefined
 }
 
 const Stack = createNativeStackNavigator<HomeStackParams>()
@@ -33,6 +35,7 @@ export const Routes: React.FC<RoutesProps> = ({}) => {
             <Stack.Screen name="notfound" component={NotFound} />
             <Stack.Screen name="systemChooser" component={SystemChooser} />
             <Stack.Screen name="admin" component={AdminScreen} />
+            <Stack.Screen name="profile" component={Profile} />
         </Stack.Navigator>
     )
 }

@@ -37,6 +37,11 @@ export const Providers: React.FC<ProvidersProps> = ({ children }) => {
                             // @ts-ignore
                             screens: {},
                         },
+                        profile: {
+                            path: "profile",
+                            // @ts-ignore
+                            screens: {},
+                        },
                         notfound: "*",
                     },
                 },
