@@ -100,7 +100,7 @@ export const ResaleListModal: React.FC<ResaleListModalProps> = ({ visible, onDis
                         <Text style={{ color: colors.dark }}>Revendas</Text>
                         <View style={[{ gap: 5 }]}>
                             {resales.map((resale) => (
-                                <ResaleCard resale={resale} onPress={onSelectResale} />
+                                <ResaleCard key={resale.id} resale={resale} onPress={onSelectResale} />
                             ))}
                         </View>
                     </View>

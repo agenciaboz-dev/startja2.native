@@ -29,7 +29,7 @@ export const CustomersAccordion: React.FC<CustomersAccordionProps> = ({ resale }
                         value={searchValue}
                         onChangeText={(text) => setSearchValue(text)}
                     />
-                    <ScrollView style={{ maxHeight: 600 }}>
+                    <ScrollView style={{ maxHeight: 700 }}>
                         <FlatList
                             data={[1, 2, 3, 4, 5]}
                             renderItem={({ item }) => <CustomerComponent />}
