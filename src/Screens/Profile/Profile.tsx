@@ -3,6 +3,7 @@ import { SectionList, View } from "react-native"
 import { Button, Divider, Surface, Text } from "react-native-paper"
 import { OptionsMenu } from "./OptionsMenu"
 import { colors } from "../../style/colors"
+import { OutOptions } from "./OutOptions"
 
 interface ProfileProps {}
 
@@ -11,9 +12,10 @@ export const Profile: React.FC<ProfileProps> = ({}) => {
         <View style={{ flex: 1, flexDirection: "row" }}>
             <View style={{ flex: 0.35, borderRightColor: colors.primary, borderRightWidth: 1 }}>
                 <OptionsMenu style={{ flex: 1 }} />
-                <View style={{ flex: 0.2 }}></View>
+                <View style={{ flex: 0.2 }}>
+                    <OutOptions />
+                </View>
             </View>
-            <Divider />
             <View style={{ flex: 0.65 }}></View>
         </View>
     )
