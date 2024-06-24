@@ -4,6 +4,7 @@ import { Button, Divider, Surface, Text } from "react-native-paper"
 import { OptionsMenu } from "./OptionsMenu"
 import { colors } from "../../style/colors"
 import { OutOptions } from "./OutOptions"
+import { ProfileView } from "./ProfileView"
 
 interface ProfileProps {}
 
@@ -16,7 +17,9 @@ export const Profile: React.FC<ProfileProps> = ({}) => {
                     <OutOptions />
                 </View>
             </View>
-            <View style={{ flex: 0.65 }}></View>
+            <View style={{ flex: 0.65 }}>
+                <ProfileView />
+            </View>
         </View>
     )
 }
