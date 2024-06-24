@@ -15,12 +15,14 @@ export const SortComponent: React.FC<SortComponentProps> = ({ title, style }) =>
             onPress={() => console.log("clicou no sort")}
             style={[
                 {
+                    backgroundColor: "white",
                     borderColor: colors.grey,
                     borderWidth: 1,
                     borderRadius: 5,
                     flexDirection: "row",
                     alignItems: "center",
                     justifyContent: "center",
+                    height: "auto",
                 },
                 style,
             ]}
