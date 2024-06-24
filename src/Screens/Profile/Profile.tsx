@@ -1,24 +1,20 @@
 import React from "react"
-import { Button, Surface } from "react-native-paper"
-// import chalk from "chalk"
+import { SectionList, View } from "react-native"
+import { Button, Divider, Surface, Text } from "react-native-paper"
+import { OptionsMenu } from "./OptionsMenu"
+import { colors } from "../../style/colors"
 
 interface ProfileProps {}
 
 export const Profile: React.FC<ProfileProps> = ({}) => {
-    // const onPress = () => {
-    //     console.log(chalk.blue("Hello world!"))
-    // }
-
     return (
-        <Surface style={{ flex: 1 }}>
-            <Button
-                onPress={() => {
-                    // onPress
-                    console.log("imprimiu")
-                }}
-            >
-                Teste
-            </Button>
-        </Surface>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+            <View style={{ flex: 0.35, borderRightColor: colors.primary, borderRightWidth: 1 }}>
+                <OptionsMenu style={{ flex: 1 }} />
+                <View style={{ flex: 0.2 }}></View>
+            </View>
+            <Divider />
+            <View style={{ flex: 0.65 }}></View>
+        </View>
     )
 }
