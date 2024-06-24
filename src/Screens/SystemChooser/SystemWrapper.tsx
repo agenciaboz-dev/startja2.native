@@ -1,13 +1,12 @@
 import React, { useState } from "react"
-import { LayoutAnimation, StyleProp, View, ViewStyle } from "react-native"
+import { LayoutAnimation, View, Text, Platform, Pressable } from "react-native"
 import { SystemComponentProp } from "../../types/SystemComponentProp"
-import { Button, List, Surface, Text, useTheme } from "react-native-paper"
-import { SystemContainer } from "./SystemContainer"
+import { Button, List, Surface, useTheme } from "react-native-paper"
 import { colors } from "../../style/colors"
-import { Style } from "react-native-paper/lib/typescript/components/List/utils"
 import { SearchComponent } from "../../components/Tools/SearchComponent"
 import { SortComponent } from "../../components/Tools/SortComponent"
 import { ExpandButton } from "../../components/Tools/ExpandButton"
+import { SystemContainer } from "./SystemContainer"
 
 interface SystemWrapperProps {
     name: string
@@ -16,7 +15,6 @@ interface SystemWrapperProps {
 
 export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) => {
     const theme = useTheme()
-
     const [expanded, setExpanded] = useState(true)
 
     const onAccordionPress = () => {
@@ -25,31 +23,58 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
     }
 
     return (
-        <Surface style={[]}>
-            <List.Accordion
-                title={
-                    <View style={[{ flexDirection: "row", justifyContent: "space-between" }]}>
-                        <Text style={[{ fontWeight: "bold", color: colors.grey }]}>{name}</Text>
-                        {systems.length > 1 && <View style={[{ flexDirection: "row" }]}></View>}
-                    </View>
-                }
-                right={() => (
-                    <View style={{ flexDirection: "row", gap: 10 }}>
-                        <SearchComponent placeholder="Procurar por nome" />
-                        <SortComponent title="Ordenar" style={{ paddingRight: 10 }} />
-                        <ExpandButton onPress={onAccordionPress} />
+        <Surface>
+            <Pressable>
+                {Platform.OS === "web" && (
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            backgroundColor: colors.box,
+                            cursor: "auto",
+                            padding: 20,
+                        }}
+                    >
+                        <Text style={{ fontWeight: "bold", color: colors.grey }}>{name}</Text>
+                        {name !== "Admin. Master" && (
+                            <View style={{ flexDirection: "row", gap: 10 }}>
+                                <SearchComponent placeholder="Procurar por nome" />
+                                <SortComponent title="Ordenar" style={{ paddingHorizontal: "auto" }} />
+                                <ExpandButton onPress={onAccordionPress} expanded={expanded} />
+                            </View>
+                        )}
                     </View>
                 )}
-                expanded={expanded}
-                // onPress={onAccordionPress}
-                style={{}}
-            >
-                <Surface style={[{ padding: 20 }]}>
+                {Platform.OS !== "web" && (
+                    <View
+                        style={{
+                            backgroundColor: colors.box,
+                            cursor: "auto",
+                            padding: 20,
+                            gap: 10,
+                        }}
+                    >
+                        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                            <Text style={{ fontWeight: "bold", color: colors.grey }}>{name}</Text>
+                            {name !== "Admin. Master" && <ExpandButton onPress={onAccordionPress} expanded={expanded} />}
+                        </View>
+                        {name !== "Admin. Master" && (
+                            <View style={{ flexDirection: "row", gap: 10 }}>
+                                <SearchComponent placeholder="Procurar" />
+                                <SortComponent title="Ordenar" style={{ paddingHorizontal: "auto" }} />
+                            </View>
+                        )}
+                    </View>
+                )}
+            </Pressable>
+            {expanded && (
+                <Surface style={{ padding: 20, gap: 10 }}>
                     {systems.map((item) => (
                         <SystemContainer key={item.route} name={item.name} route={item.route} />
                     ))}
                 </Surface>
-            </List.Accordion>
+            )}
         </Surface>
     )
 }
