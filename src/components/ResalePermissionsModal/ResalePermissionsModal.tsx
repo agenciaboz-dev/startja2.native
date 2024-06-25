@@ -1,5 +1,5 @@
 import React from "react"
-import { Platform, View } from "react-native"
+import { Platform, ScrollView, View } from "react-native"
 import { Button, Checkbox, IconButton, Modal, Portal, Text, useTheme } from "react-native-paper"
 import { colors } from "../../style/colors"
 import { PermissionsHeader } from "./PermissionsHeader"
@@ -9,6 +9,7 @@ import { hasPermission } from "../../tools/hasPermission"
 import { TwoButtonsView } from "../TwoButtonsView"
 import { PermissionsBody } from "./PermissionsBody"
 import { ResalePermissionsForm } from "../../types/server/class/Permissions"
+import { PermissionsCardMobile } from "./PermissionsCardMobile"
 
 interface WithPermissions {
     permissions: ResalePermissionsForm
@@ -75,123 +76,118 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                         padding: 20,
                         margin: 20,
                         justifyContent: "flex-start",
-                        gap: 20,
                     },
                     Platform.OS == "web" ? { marginHorizontal: 300, marginVertical: 20 } : {},
                 ]}
             >
-                <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }]}>
-                    <Text style={{ color: colors.grey }} variant="headlineLarge">
-                        Permissões
-                    </Text>
-                    <IconButton icon={"close"} style={{ margin: 0 }} onPress={onDismiss} />
-                </View>
-
-                <View>
-                    <PermissionsHeader title="Admin" headers={["Permitir"]} />
-                    <PermissionsBody description={"Tornar administrador da revenda"} status={is_admin} onPress={onAdminPress} />
-                </View>
-
-                {Platform.OS === "web" && (
-                    <View>
-                        <PermissionsHeader title="Nome" headers={permissions_data.map((item) => item.label)} />
-                        {Object.entries(formik.values.permissions)
-                            .filter(([key, value]) => typeof value == "number")
-                            .map((item) => (
-                                // <PermissionItem key={item[0]} description={formatPermissionsLabel(item[0])} onPress={() => onCheckboxPress(item[0], permission.value)} status={hasPermission(permission.value, formik.values.permissions[item[0]]}  />
-                                <View
-                                    key={item[0]}
-                                    style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}
-                                >
-                                    <Text style={{ flex: 0.4 }}>{formatPermissionsLabel(item[0])}</Text>
-                                    <View style={[{ flexDirection: "row", gap: 30, flex: 0.6 }]}>
-                                        {permissions_data.map((permission) => (
-                                            <View style={{ flex: 1, alignItems: "center" }} key={permission.value}>
-                                                <Checkbox
-                                                    onPress={() => onCheckboxPress(item[0], permission.value)}
-                                                    status={
-                                                        // @ts-ignore
-                                                        hasPermission(permission.value, formik.values.permissions[item[0]]) ? "checked" : "unchecked"
-                                                    }
-                                                />
-                                            </View>
-                                        ))}
-                                    </View>
-                                </View>
-                            ))}
-                    </View>
-                )}
-
-                {/* {Platform.OS !== "web" && (
-                    <View>
-                        <View style={[{ gap: 15 }]}>
-                            {Object.entries(formik.values.permissions)
-                                .filter(([key, value]) => typeof value == "number")
-                                .map((item) => (
-                                    // <PermissionItem key={item[0]} description={formatPermissionsLabel(item[0])} onPress={() => onCheckboxPress(item[0], permission.value)} status={hasPermission(permission.value, formik.values.permissions[item[0]]}  />
-                                    <View
-                                        key={item[0]}
-                                        // style={[{ flexDirection: "row", justifyContent: "center", alignItems: "center", paddingHorizontal: 15 }]}
-                                    >
-                                        <Text style={[{}]}>{formatPermissionsLabel(item[0])}</Text>
-                                        {permissions_data.map((permission) => (
-                                            <View>
-                                                <View style={{ flex: 1, alignItems: "center" }} key={permission.value}>
-                                                    <Checkbox
-                                                        onPress={() => onCheckboxPress(item[0], permission.value)}
-                                                        status={
-                                                            // @ts-ignore
-                                                            hasPermission(permission.value, formik.values.permissions[item[0]])
-                                                                ? "checked"
-                                                                : "unchecked"
-                                                        }
-                                                    />
-                                                </View>
-                                            </View>
-                                        ))}
-                                    </View>
-                                ))}
+                <ScrollView>
+                    <View
+                        style={{
+                            gap: 40,
+                        }}
+                    >
+                        <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }]}>
+                            <Text style={{ color: colors.grey }} variant="headlineLarge">
+                                Permissões
+                            </Text>
+                            <IconButton icon={"close"} style={{ margin: 0 }} onPress={onDismiss} />
                         </View>
+                        <View>
+                            <PermissionsHeader title="Admin" headers={["Permitir"]} />
+                            <PermissionsBody description={"Tornar administrador da revenda"} status={is_admin} onPress={onAdminPress} />
+                        </View>
+                        {Platform.OS === "web" && (
+                            <View>
+                                <PermissionsHeader title="Nome" headers={permissions_data.map((item) => item.label)} />
+                                {Object.entries(formik.values.permissions)
+                                    .filter(([key, value]) => typeof value == "number")
+                                    .map((item) => (
+                                        // <PermissionItem key={item[0]} description={formatPermissionsLabel(item[0])} onPress={() => onCheckboxPress(item[0], permission.value)} status={hasPermission(permission.value, formik.values.permissions[item[0]]}  />
+                                        <View
+                                            key={item[0]}
+                                            style={[
+                                                {
+                                                    flexDirection: "row",
+                                                    justifyContent: "space-between",
+                                                    alignItems: "center",
+                                                    paddingHorizontal: 20,
+                                                },
+                                            ]}
+                                        >
+                                            <Text style={{ flex: 0.4 }}>{formatPermissionsLabel(item[0])}</Text>
+                                            <View style={[{ flexDirection: "row", gap: 30, flex: 0.6 }]}>
+                                                {permissions_data.map((permission) => (
+                                                    <View style={{ flex: 1, alignItems: "center" }} key={permission.value}>
+                                                        <Checkbox
+                                                            onPress={() => onCheckboxPress(item[0], permission.value)}
+                                                            status={
+                                                                // @ts-ignore
+                                                                hasPermission(permission.value, formik.values.permissions[item[0]])
+                                                                    ? "checked"
+                                                                    : "unchecked"
+                                                            }
+                                                        />
+                                                    </View>
+                                                ))}
+                                            </View>
+                                        </View>
+                                    ))}
+                            </View>
+                        )}
+                        {Platform.OS !== "web" && (
+                            <View style={[{ gap: 40 }]}>
+                                {Object.entries(formik.values.permissions)
+                                    .filter(([key, value]) => typeof value == "number")
+                                    .map((item) => (
+                                        <PermissionsCardMobile
+                                            item={item}
+                                            title={formatPermissionsLabel(item[0])}
+                                            headers={permissions_data.map((item) => item.label)}
+                                            permissions_data={permissions_data}
+                                            onCheckboxPress={onCheckboxPress}
+                                            formik={formik}
+                                        />
+                                    ))}
+                            </View>
+                        )}
+                        <View>
+                            <PermissionsHeader title="Ações" headers={["Permitir"]} />
+                            <PermissionsBody
+                                description="Editar permissões"
+                                onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
+                                status={formik.values.permissions.editPermissions ? true : false}
+                            />
+                            {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
+                            <Text style={{ flex: 0.4 }}>Editar permissões</Text>
+                            <View style={{ flex: 0.6, alignItems: "center" }}>
+                                <Checkbox
+                                    status={formik.values.permissions.editPermissions ? "checked" : "unchecked"}
+                                    onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
+                                />
+                            </View>
+                                        </View> */}
+                            <PermissionsBody
+                                description="Convidar usuário"
+                                onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
+                                status={formik.values.permissions.inviteUser ? true : false}
+                            />
+                            {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
+                            <Text style={{ flex: 0.4 }}>Convidar usuário</Text>
+                            <View style={{ flex: 0.6, alignItems: "center" }}>
+                                <Checkbox
+                                    status={formik.values.permissions.inviteUser ? "checked" : "unchecked"}
+                                    onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
+                                />
+                            </View>
+                                        </View> */}
+                        </View>
+                        <TwoButtonsView>
+                            <Button mode="contained" onPress={onDismiss}>
+                                Salvar permissões
+                            </Button>
+                        </TwoButtonsView>
                     </View>
-                )} */}
-
-                <View>
-                    <PermissionsHeader title="Ações" headers={["Permitir"]} />
-                    <PermissionsBody
-                        description="Editar permissões"
-                        onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
-                        status={formik.values.permissions.editPermissions ? true : false}
-                    />
-                    {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
-                    <Text style={{ flex: 0.4 }}>Editar permissões</Text>
-                    <View style={{ flex: 0.6, alignItems: "center" }}>
-                        <Checkbox
-                            status={formik.values.permissions.editPermissions ? "checked" : "unchecked"}
-                            onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
-                        />
-                    </View>
-                                </View> */}
-                    <PermissionsBody
-                        description="Convidar usuário"
-                        onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
-                        status={formik.values.permissions.inviteUser ? true : false}
-                    />
-                    {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
-                    <Text style={{ flex: 0.4 }}>Convidar usuário</Text>
-                    <View style={{ flex: 0.6, alignItems: "center" }}>
-                        <Checkbox
-                            status={formik.values.permissions.inviteUser ? "checked" : "unchecked"}
-                            onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
-                        />
-                    </View>
-                                </View> */}
-                </View>
-
-                <TwoButtonsView>
-                    <Button mode="contained" onPress={onDismiss}>
-                        Salvar permissões
-                    </Button>
-                </TwoButtonsView>
+                </ScrollView>
             </Modal>
         </Portal>
     )
