@@ -10,6 +10,7 @@ interface UserNameModalProps {
 
 export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss }) => {
     const [nameActive, setNameActive] = useState(false)
+    const [passwordActive, setPasswordActive] = useState(false)
 
     return (
         <Portal>
@@ -44,10 +45,10 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
                     <TextInput
                         mode="outlined"
                         placeholder="Insira sua senha"
-                        label={nameActive ? "Senha" : "Insira sua senha"}
+                        label={passwordActive ? "Senha" : "Insira sua senha"}
                         // label="Novo nome de usuário"
-                        onFocus={() => setNameActive(true)}
-                        onBlur={() => setNameActive(false)}
+                        onFocus={() => setPasswordActive(true)}
+                        onBlur={() => setPasswordActive(false)}
                     />
                     <Button mode="contained" style={{ alignSelf: "flex-end" }}>
                         Atualizar
