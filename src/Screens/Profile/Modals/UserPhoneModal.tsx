@@ -32,7 +32,7 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
             >
                 <View style={{ gap: 20 }}>
                     <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                        <Text variant="headlineSmall">Alterar email do usuário</Text>
+                        <Text variant="headlineSmall">Alterar telefone</Text>
                         <IconButton icon="close" onPress={onDismiss} />
                     </View>
                     <Text>Atualize seu número de telefone para garantir que podemos contatá-lo quando necessário.</Text>
