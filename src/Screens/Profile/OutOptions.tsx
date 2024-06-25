@@ -2,15 +2,20 @@ import React, { useState } from "react"
 import { Pressable, StyleProp, Touchable, View, ViewStyle } from "react-native"
 import { Icon, Surface, Text, TouchableRipple } from "react-native-paper"
 import { colors } from "../../style/colors"
+import { useLinkTo } from "@react-navigation/native"
+import { useUser } from "../../hooks/useUser"
 
 interface OutOptionsProps {
     style?: StyleProp<ViewStyle>
 }
 
 export const OutOptions: React.FC<OutOptionsProps> = ({ style }) => {
+    const { logout } = useUser()
+    const linkTo = useLinkTo()
+
     const options = [
-        { option: "Gestão de Contas", icon: "logout" },
-        { option: "Sair", icon: "logout" },
+        { option: "Gestão de Contas", icon: "logout", link: "/selecionar-sistema" },
+        { option: "Sair", icon: "logout", link: "/" },
     ]
 
     // Estado para gerenciar hover de cada item usando um objeto
@@ -30,7 +35,7 @@ export const OutOptions: React.FC<OutOptionsProps> = ({ style }) => {
         <View style={[{ width: 210, alignSelf: "flex-end", paddingHorizontal: 10 }, style]}>
             {options.map((option) => (
                 <TouchableRipple
-                    onPress={() => console.log("teste")}
+                    onPress={option.option == "sair" ? logout : () => linkTo(option.link)}
                     style={{}}
                     onHoverIn={() => handleMouseEnter(`${option.option}`)}
                     onHoverOut={() => handleMouseLeave(`${option.option}`)}
