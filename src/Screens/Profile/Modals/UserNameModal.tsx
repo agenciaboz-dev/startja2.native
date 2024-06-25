@@ -38,7 +38,6 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
                         mode="outlined"
                         placeholder="Digite seu novo nome de usuário"
                         label={nameActive ? "Novo nome de usuário" : "Digite seu novo nome de usuário"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setNameActive(true)}
                         onBlur={() => setNameActive(false)}
                     />
@@ -46,7 +45,6 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
                         mode="outlined"
                         placeholder="Insira sua senha"
                         label={passwordActive ? "Senha" : "Insira sua senha"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setPasswordActive(true)}
                         onBlur={() => setPasswordActive(false)}
                     />

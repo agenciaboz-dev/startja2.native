@@ -39,7 +39,6 @@ export const UserEmailModal: React.FC<UserEmailModalProps> = ({ visible, onDismi
                         mode="outlined"
                         placeholder="Digite o endereço de email atual"
                         label={emailActive ? "Endereço de email atual" : "Digite o endereço de email atual"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setEmailActive(true)}
                         onBlur={() => setEmailActive(false)}
                     />
@@ -47,7 +46,6 @@ export const UserEmailModal: React.FC<UserEmailModalProps> = ({ visible, onDismi
                         mode="outlined"
                         placeholder="Digite o novo endereço de email"
                         label={newEmailActive ? "Novo email" : "Digite o novo endereço de email"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setNewEmailActive(true)}
                         onBlur={() => setNewEmailActive(false)}
                     />
@@ -55,7 +53,6 @@ export const UserEmailModal: React.FC<UserEmailModalProps> = ({ visible, onDismi
                         mode="outlined"
                         placeholder="Insira sua senha"
                         label={passwordActive ? "Senha" : "Insira sua senha"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setPasswordActive(true)}
                         onBlur={() => setPasswordActive(false)}
                     />

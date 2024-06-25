@@ -40,7 +40,6 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         mode="outlined"
                         placeholder="Digite seu telefone atual"
                         label={phoneActive ? "Telefone atual" : "Digite seu telefone atual"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setPhoneActive(true)}
                         onBlur={() => setPhoneActive(false)}
                     />
@@ -48,7 +47,6 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         mode="outlined"
                         placeholder="Digite seu novo telefone"
                         label={newPhoneActive ? "Novo telefone" : "Digite seu novo telefone"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setNewPhoneActive(true)}
                         onBlur={() => setNewPhoneActive(false)}
                     />
@@ -56,7 +54,6 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         mode="outlined"
                         placeholder="Insira sua senha"
                         label={passwordActive ? "Senha" : "Insira sua senha"}
-                        // label="Novo nome de usuário"
                         onFocus={() => setPasswordActive(true)}
                         onBlur={() => setPasswordActive(false)}
                     />
