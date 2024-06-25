@@ -50,7 +50,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({}) => {
             </Surface>
             <View style={{ gap: 15 }}>
                 <Text variant="headlineSmall">Senhas e Autenticações</Text>
-                <Button mode="contained" style={{ maxWidth: 140 }} onPress={() => setOpenPasswordModal(true)}>
+                <Button mode="contained" style={{ alignSelf: "flex-start" }} onPress={() => setOpenPasswordModal(true)}>
                     Alterar senha
                 </Button>
             </View>
