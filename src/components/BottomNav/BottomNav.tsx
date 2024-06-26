@@ -22,8 +22,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({}) => {
             }}
         >
             <BottomNavButton icon="view-grid-outline" title="Home" onPress={() => linkTo("/selecionar-sistema")} />
-            <BottomNavButton icon="account-circle" title="Minha Conta" onPress={() => linkTo("/admin")} />
-            <BottomNavButton icon="account" title="Cliente" onPress={() => linkTo("/profile")} />
+            <BottomNavButton icon="account-circle" title="Minha Conta" onPress={() => linkTo("/profile")} />
+            <BottomNavButton icon="account" title="Cliente" onPress={() => {}} />
         </View>
     )
 }
