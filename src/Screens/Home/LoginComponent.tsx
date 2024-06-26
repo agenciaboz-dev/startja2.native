@@ -102,8 +102,8 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({ email, password 
                 </Button>
                 <LabeledComponent
                     Component={
-                        <View style={[Platform.OS == "ios" && { borderWidth: 1, borderRadius: 100 }]}>
-                            <Checkbox
+                        <View>
+                            <Checkbox.Android
                                 status={keepConnected.value ? "checked" : "unchecked"}
                                 onPress={() => keepConnected.changeValue(!keepConnected.value)}
                             />
