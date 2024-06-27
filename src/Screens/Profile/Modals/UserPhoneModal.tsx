@@ -72,7 +72,6 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         <IconButton icon="close" onPress={onDismiss} />
                     </View>
                     <Text>Atualize seu número de telefone para garantir que podemos contatá-lo quando necessário.</Text>
-
                     <TextInput
                         value={currentPhone}
                         mode="outlined"
@@ -85,7 +84,7 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         }}
                     />
                     {currentPhoneError && <Text style={{ color: colors.error, marginTop: -20 }}>{validationErrors.invalidPhoneConfirmation}</Text>}
-
+                    //todo implementar mascara
                     <TextInput
                         value={formik.values.phone}
                         mode="outlined"
@@ -101,7 +100,6 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                     {/* {formik.touched.phone && formik.errors.phone && (
                         <Text style={{ color: colors.error, marginTop: -20 }}>{formik.errors.phone}</Text>
                     )} */}
-
                     <TextInput
                         value={currentPassword}
                         mode="outlined"
@@ -119,7 +117,6 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                     {currentPasswordError && (
                         <Text style={{ color: colors.error, marginTop: -20 }}>{validationErrors.invalidPasswordConfirmation}</Text>
                     )}
-
                     <Button
                         mode="contained"
                         style={{ alignSelf: "flex-end" }}
