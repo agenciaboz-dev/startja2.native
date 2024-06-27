@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Pressable, View } from "react-native"
+import { Platform, Pressable, View } from "react-native"
 import { Surface, Text, TouchableRipple } from "react-native-paper"
 import { colors } from "../../style/colors"
 
@@ -26,8 +26,10 @@ export const OptionItemMenu: React.FC<OptionItemMenuProps> = ({ section }) => {
     return (
         <View>
             {section.map((option) => (
-                <View key={option.title} style={{ gap: 2 }}>
-                    <Text style={{ color: colors.grey, marginBottom: 5 }}>{option.title}</Text>
+                <View key={option.title} style={[{ gap: 2 }, Platform.OS !== "web" && { gap: 10 }]}>
+                    <Text style={[{ color: colors.grey, marginBottom: 5 }, Platform.OS !== "web" && { height: 20, marginBottom: 0 }]}>
+                        {option.title}
+                    </Text>
                     {option.data.map((item) => (
                         <TouchableRipple
                             key={item.option}
