@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Pressable, StyleProp, Touchable, View, ViewStyle } from "react-native"
+import { Platform, Pressable, StyleProp, Touchable, View, ViewStyle } from "react-native"
 import { Icon, Surface, Text, TouchableRipple } from "react-native-paper"
 import { colors } from "../../style/colors"
 import { useLinkTo } from "@react-navigation/native"
@@ -32,7 +32,13 @@ export const OutOptions: React.FC<OutOptionsProps> = ({ style }) => {
     }
 
     return (
-        <View style={[{ width: 210, alignSelf: "flex-end", paddingHorizontal: 10 }, style]}>
+        <View
+            style={[
+                { width: 210, alignSelf: "flex-end", paddingHorizontal: 10 },
+                Platform.OS !== "web" && { width: "100%", alignSelf: "flex-start", paddingHorizontal: 0, gap: 10 },
+                style,
+            ]}
+        >
             {options.map((option) => (
                 <TouchableRipple
                     key={option.option}
@@ -44,6 +50,9 @@ export const OutOptions: React.FC<OutOptionsProps> = ({ style }) => {
                     <View
                         style={[
                             { maxWidth: 200, gap: 10, flexDirection: "row", paddingVertical: 5, paddingLeft: 5, borderRadius: 5 },
+                            Platform.OS !== "web" && {
+                                maxWidth: "100%",
+                            },
                             hoverStates[`${option.option}`] && {
                                 borderColor: colors.primary,
                                 borderWidth: 1,
@@ -53,7 +62,6 @@ export const OutOptions: React.FC<OutOptionsProps> = ({ style }) => {
                         ]}
                     >
                         <Icon size={20} source={option.icon}></Icon>
-
                         <Text>{option.option}</Text>
                     </View>
                 </TouchableRipple>

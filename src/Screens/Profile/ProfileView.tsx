@@ -10,16 +10,17 @@ import { colors } from "../../style/colors"
 import { PasswordModal } from "./Modals/PasswordModal"
 import { DisableAccountModal } from "./Modals/DisableAccountModal"
 import { DeleteAccountModal } from "./Modals/DeleteAccountModal"
-
 import { UserEmailModal } from "./Modals/UserEmailModal"
 import { UserPhoneModal } from "./Modals/UserPhoneModal"
 import { UserNameModal } from "./Modals/UserNameModal"
+import { SettingsModal } from "./Modals/SettingsModal"
 
 interface ProfileViewProps {}
 
 export const ProfileView: React.FC<ProfileViewProps> = ({}) => {
     const { user } = useUser()
     const [hover, setHover] = useState(false)
+    const [openSettingsModal, setOpenSettingsModal] = useState(false)
     const [openUserNameModal, setOpenUserNameModal] = useState(false)
     const [openUserEmailModal, setOpenUserEmailModal] = useState(false)
     const [openPhoneModal, setOpenPhoneModal] = useState(false)
@@ -39,7 +40,13 @@ export const ProfileView: React.FC<ProfileViewProps> = ({}) => {
                 {Platform.OS === "web" ? (
                     <IconButton icon="close" />
                 ) : (
-                    <IconButton mode="contained" containerColor={colors.primary} iconColor="white" icon={"cog"} />
+                    <IconButton
+                        mode="contained"
+                        containerColor={colors.primary}
+                        iconColor="white"
+                        icon={"cog"}
+                        onPress={() => setOpenSettingsModal(true)}
+                    />
                 )}
             </View>
             <Surface style={[{ padding: 20, gap: 30, backgroundColor: colors.secondary }, Platform.OS !== "web" && { marginTop: -10 }]}>
@@ -87,6 +94,7 @@ export const ProfileView: React.FC<ProfileViewProps> = ({}) => {
                     </Button>
                 </View>
             </View>
+            <SettingsModal visible={openSettingsModal} onDismiss={() => setOpenSettingsModal(false)} />
             <UserNameModal visible={openUserNameModal} onDismiss={() => setOpenUserNameModal(false)} />
             <UserEmailModal visible={openUserEmailModal} onDismiss={() => setOpenUserEmailModal(false)} />
             <UserPhoneModal visible={openPhoneModal} onDismiss={() => setOpenPhoneModal(false)} />
