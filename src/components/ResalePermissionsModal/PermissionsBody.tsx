@@ -17,7 +17,7 @@ interface PermissionsBodyProps {
     /* <Text style={{ flex: 0.4 }}>Editar permissões</Text>
 
 <View style={{ flex: 0.6, alignItems: "center" }}>
-    <Checkbox
+    <Checkbox.Android
         status={formik.values.permissions.editPermissions ? "checked" : "unchecked"}
         onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
     />
@@ -44,7 +44,7 @@ export const PermissionsBody: React.FC<PermissionsBodyProps> = ({ key, status, o
             <Text style={[Platform.OS == "web" && { flex: 0.4 }, Platform.OS !== "web" && { flex: 1 }, textStyle]}>{description}</Text>
 
             <View style={[{ flex: 0.093, alignItems: "center" }, Platform.OS !== "web" && { flex: 0.23 }, checkboxStyle]}>
-                <Checkbox status={status ? "checked" : "unchecked"} onPress={onPress} />
+                <Checkbox.Android status={status ? "checked" : "unchecked"} onPress={onPress} />
             </View>
         </View>
     )

@@ -160,7 +160,7 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                             {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
                             <Text style={{ flex: 0.4 }}>Editar permissões</Text>
                             <View style={{ flex: 0.6, alignItems: "center" }}>
-                                <Checkbox
+                                <Checkbox.Android
                                     status={formik.values.permissions.editPermissions ? "checked" : "unchecked"}
                                     onPress={() => formik.setFieldValue("permissions.editPermissions", !formik.values.permissions.editPermissions)}
                                 />
@@ -174,7 +174,7 @@ export const ResalePermissionsModal: React.FC<ResalePermissionsModalProps> = ({ 
                             {/* <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20 }]}>
                             <Text style={{ flex: 0.4 }}>Convidar usuário</Text>
                             <View style={{ flex: 0.6, alignItems: "center" }}>
-                                <Checkbox
+                                <Checkbox.Android
                                     status={formik.values.permissions.inviteUser ? "checked" : "unchecked"}
                                     onPress={() => formik.setFieldValue("permissions.inviteUser", !formik.values.permissions.inviteUser)}
                                 />

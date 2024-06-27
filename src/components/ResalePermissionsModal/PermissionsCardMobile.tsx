@@ -70,7 +70,7 @@ export const PermissionsCardMobile: React.FC<PermissionsCardMobileProps> = ({ it
             <View style={[{ flexDirection: "row", gap: 20 }]}>
                 {permissions_data.map((permission) => (
                     <View style={{ alignItems: "center" }} key={permission.value}>
-                        <Checkbox
+                        <Checkbox.Android
                             onPress={() => onCheckboxPress(item[0], permission.value)}
                             status={
                                 // @ts-ignore
