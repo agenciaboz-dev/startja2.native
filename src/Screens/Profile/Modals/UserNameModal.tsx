@@ -39,11 +39,13 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
             try {
                 const response = await api.patch("/user", values)
                 context.setUser(response.data)
+                formik.resetForm()
             } catch (error) {
                 console.log(error)
             }
         },
         validationSchema: validationschema,
+        enableReinitialize: true,
     })
 
     return (
@@ -110,6 +112,7 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
                                 if (isValid) {
                                     formik.handleSubmit()
                                     onDismiss()
+                                    setCurrentPassword("")
                                 }
                             })
                         }}
