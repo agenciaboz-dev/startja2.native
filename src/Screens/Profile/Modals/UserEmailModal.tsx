@@ -64,6 +64,7 @@ export const UserEmailModal: React.FC<UserEmailModalProps> = ({ visible, onDismi
                         borderRadius: 10,
                     },
                     Platform.OS == "web" && {},
+                    Platform.OS !== "web" && { width: "90%" },
                 ]}
             >
                 <View style={{ gap: 20 }}>

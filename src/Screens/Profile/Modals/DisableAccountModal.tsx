@@ -27,6 +27,7 @@ export const DisableAccountModal: React.FC<DisableAccountModalProps> = ({ visibl
                         maxWidth: 500,
                     },
                     Platform.OS == "web" && {},
+                    Platform.OS !== "web" && { width: "90%" },
                 ]}
             >
                 <View style={{ gap: 20 }}>

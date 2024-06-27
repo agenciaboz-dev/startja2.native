@@ -27,6 +27,7 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         borderRadius: 10,
                     },
                     Platform.OS == "web" && {},
+                    Platform.OS !== "web" && { width: "90%" },
                 ]}
                 style={{}}
             >
