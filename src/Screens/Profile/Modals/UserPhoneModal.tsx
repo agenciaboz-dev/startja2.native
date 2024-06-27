@@ -85,7 +85,7 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         }}
                     />
                     {currentPhoneError && <Text style={{ color: colors.error, marginTop: -20 }}>{validationErrors.invalidPhoneConfirmation}</Text>}
-                    //todo implementar mascara
+                    {/* //todo implementar mascara */}
                     <TextInput
                         value={formik.values.phone}
                         mode="outlined"
