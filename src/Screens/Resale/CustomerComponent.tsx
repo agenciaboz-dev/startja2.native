@@ -26,7 +26,8 @@ export const CustomerComponent: React.FC<CustomerComponentProps> = ({}) => {
                     <Text variant="bodyLarge">Nome do cliente</Text>
                 </View>
             </View>
-            <Text>CPF: 000.000.000/00 : Cidade/UF</Text>
+            <Text>CPF: 000.000.000/00</Text>
+            <Text>Cidade/UF</Text>
             <Text>Certificado digital expira em 00/00</Text>
             <Text>cliente@email.com</Text>
             <Text>00 0 0000-0000</Text>
