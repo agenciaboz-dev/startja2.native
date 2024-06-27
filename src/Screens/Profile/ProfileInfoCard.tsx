@@ -1,6 +1,7 @@
 import React from "react"
-import { View } from "react-native"
-import { Button, Text } from "react-native-paper"
+import { Platform, View } from "react-native"
+import { Button, IconButton, Text } from "react-native-paper"
+import { colors } from "../../style/colors"
 
 interface ProfileInfoCardProps {
     description: string
@@ -11,13 +12,21 @@ interface ProfileInfoCardProps {
 export const ProfileInfoCard: React.FC<ProfileInfoCardProps> = ({ description, data, onPress }) => {
     return (
         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <View>
-                <Text>{description}</Text>
-                <Text>{data}</Text>
+            <View style={{ flex: 1, marginRight: 10, gap: 5 }}>
+                <Text style={{ overflow: "hidden", height: 20 }} numberOfLines={1} ellipsizeMode="tail">
+                    {description}
+                </Text>
+                <Text style={{ overflow: "hidden", height: 20 }} numberOfLines={1} ellipsizeMode="tail">
+                    {data}
+                </Text>
             </View>
-            <Button mode="contained" onPress={onPress}>
-                Editar
-            </Button>
+            {Platform.OS === "web" ? (
+                <Button mode="contained" onPress={onPress}>
+                    Editar
+                </Button>
+            ) : (
+                <IconButton mode="contained" containerColor={colors.primary} iconColor="white" icon={"pencil"} onPress={onPress} />
+            )}
         </View>
     )
 }

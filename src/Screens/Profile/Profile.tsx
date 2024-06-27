@@ -1,5 +1,5 @@
 import React from "react"
-import { SectionList, View } from "react-native"
+import { Platform, ScrollView, SectionList, View } from "react-native"
 import { Button, Divider, Surface, Text } from "react-native-paper"
 import { OptionsMenu } from "./OptionsMenu"
 import { colors } from "../../style/colors"
@@ -9,7 +9,7 @@ import { ProfileView } from "./ProfileView"
 interface ProfileProps {}
 
 export const Profile: React.FC<ProfileProps> = ({}) => {
-    return (
+    return Platform.OS === "web" ? (
         <View style={{ flex: 1, flexDirection: "row" }}>
             <View style={{ flex: 0.35, borderRightColor: colors.primary, borderRightWidth: 1 }}>
                 <OptionsMenu style={{ flex: 1 }} />
@@ -21,5 +21,11 @@ export const Profile: React.FC<ProfileProps> = ({}) => {
                 <ProfileView />
             </View>
         </View>
+    ) : (
+        <ScrollView style={{}}>
+            <View style={{ paddingTop: 20, paddingBottom: 40 }}>
+                <ProfileView />
+            </View>
+        </ScrollView>
     )
 }
