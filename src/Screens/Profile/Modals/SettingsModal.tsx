@@ -23,9 +23,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({ visible, onDismiss
                         padding: 20,
                         borderRadius: 10,
                         height: "60%",
-                        width: "80%",
+                        width: "90%",
                     },
-                    Platform.OS == "web" && {},
                 ]}
             >
                 <View style={{ flex: 1, justifyContent: "space-between" }}>

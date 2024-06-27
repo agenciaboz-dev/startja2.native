@@ -58,6 +58,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({ visible, onDismiss
                         borderRadius: 10,
                     },
                     Platform.OS == "web" && {},
+                    Platform.OS !== "web" && { width: "90%" },
                 ]}
             >
                 <View style={{ gap: 20 }}>
