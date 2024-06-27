@@ -10,9 +10,10 @@ import { colors } from "../../style/colors"
 import { PasswordModal } from "./Modals/PasswordModal"
 import { DisableAccountModal } from "./Modals/DisableAccountModal"
 import { DeleteAccountModal } from "./Modals/DeleteAccountModal"
-import { UserNameModal } from "./Modals/UserNameModal"
+
 import { UserEmailModal } from "./Modals/UserEmailModal"
 import { UserPhoneModal } from "./Modals/UserPhoneModal"
+import { UserNameModal } from "./Modals/UserNameModal"
 
 interface ProfileViewProps {}
 
