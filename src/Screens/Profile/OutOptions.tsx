@@ -35,6 +35,7 @@ export const OutOptions: React.FC<OutOptionsProps> = ({ style }) => {
         <View style={[{ width: 210, alignSelf: "flex-end", paddingHorizontal: 10 }, style]}>
             {options.map((option) => (
                 <TouchableRipple
+                    key={option.option}
                     onPress={option.option == "sair" ? logout : () => linkTo(option.link)}
                     style={{}}
                     onHoverIn={() => handleMouseEnter(`${option.option}`)}
@@ -52,6 +53,7 @@ export const OutOptions: React.FC<OutOptionsProps> = ({ style }) => {
                         ]}
                     >
                         <Icon size={20} source={option.icon}></Icon>
+
                         <Text>{option.option}</Text>
                     </View>
                 </TouchableRipple>
