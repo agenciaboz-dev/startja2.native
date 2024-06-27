@@ -16,6 +16,8 @@ interface UserNameModalProps {
 }
 
 export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss }) => {
+    const nameValidationSchema = (value: string) => /^[A-Za-zÀ-ÖØ-öø-ÿĀ-ž]+$/.test(value)
+
     const { user } = useUser()
     const [nameActive, setNameActive] = useState(false)
     const [passwordActive, setPasswordActive] = useState(false)
@@ -23,23 +25,20 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
     const [passwordError, setPasswordError] = useState(false)
 
     const validateSchema = Yup.object().shape({
-        name: Yup.string()
-            .min(3, validationErrors.shortField("nome"))
-            .matches(/^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÖÚÇÑ ]+$/, validationErrors.invalidName)
-            .required(validationErrors.required),
-
-        email: Yup.string().email(validationErrors.invalidEmail),
-
-        phone: Yup.number().required(validationErrors.invalidPhone),
+        name: Yup.string().required().test("is-name", validationErrors.invalidName, nameValidationSchema),
     })
+
+    // email: Yup.string().email(validationErrors.invalidEmail),
+
+    // phone: Yup.number().required(validationErrors.invalidPhone),
 
     const formik = useFormik<PartialUser>({
         initialValues: { id: user!.id, name: "" },
         onSubmit(values) {
             console.log(`enviando: ${values}`)
         },
-        validationSchema: validateSchema,
-        validateOnChange: false,
+        // validationSchema: validateSchema,
+        // validateOnChange: false,
         enableReinitialize: true,
     })
 
@@ -65,23 +64,24 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
                         <IconButton icon="close" onPress={onDismiss} />
                     </View>
                     <Text>Escolha um novo nome de usuário que será usado para o seu login no sistema</Text>
-
                     <TextInput
-                        mode="outlined"
                         value={formik.values.name}
+                        mode="outlined"
                         placeholder="Digite seu novo nome de usuário"
                         label={nameActive ? "Novo nome de usuário" : "Digite seu novo nome de usuário"}
                         onFocus={() => setNameActive(true)}
                         onBlur={() => {
-                            setNameActive(false)
                             formik.handleBlur("name")
+                            setNameActive(false)
                         }}
                         onChangeText={formik.handleChange("name")}
                     />
-                    {formik.touched.name && formik.errors.name && <Text style={{ color: colors.error, marginTop: -20 }}>{formik.errors.name}</Text>}
-                    <TextInput
-                        mode="outlined"
+                    {/* {
+                        formik.touched.name && formik.errors.name && <Text style={{ color: colors.error, marginTop: -20 }}>{formik.errors.name}</Text>
+                    } */}
+                    {/* <TextInput
                         value={currentPassword}
+                        mode="outlined"
                         placeholder="Insira sua senha"
                         label={passwordActive ? "Senha" : "Insira sua senha"}
                         onFocus={() => setPasswordActive(true)}
@@ -93,17 +93,13 @@ export const UserNameModal: React.FC<UserNameModalProps> = ({ visible, onDismiss
                         }}
                         secureTextEntry={true}
                     />
-                    {passwordError && <Text style={{ color: colors.error, marginTop: -20 }}>{validationErrors.invalidPasswordConfirmation}</Text>}
+                    {passwordError && <Text style={{ color: colors.error, marginTop: -20 }}>{validationErrors.invalidPasswordConfirmation}</Text>}; */}
                     <Button
                         mode="contained"
                         style={{ alignSelf: "flex-end" }}
                         onPress={() => {
-                            validatePassword(currentPassword, user!, setPasswordError).then((isValid) => {
-                                console.log(isValid)
-                                if (isValid) {
-                                    formik.handleSubmit()
-                                }
-                            })
+                            // validatePassword(currentPassword, user!, setPasswordError)
+                            formik.handleSubmit()
                         }}
                     >
                         Atualizar
