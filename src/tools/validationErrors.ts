@@ -40,3 +40,17 @@ export const validateEmail = async (
         return true
     }
 }
+
+export const validatePhone = async (
+    currentPhone: string,
+    user: User,
+    setPhoneError: React.Dispatch<React.SetStateAction<boolean>>
+): Promise<boolean> => {
+    if (currentPhone !== user!.phone) {
+        setPhoneError(true)
+        return false
+    } else {
+        setPhoneError(false)
+        return true
+    }
+}
