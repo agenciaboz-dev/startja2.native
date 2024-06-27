@@ -17,6 +17,7 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
     const theme = useTheme()
     const [expanded, setExpanded] = useState(true)
     const [filteredSystems, setFilteredSystems] = useState(systems)
+    const [sortedSystems, setSortedSystems] = useState(systems)
 
     const onAccordionPress = () => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
@@ -45,7 +46,12 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
                         {name !== "Admin. Master" && (
                             <View style={{ flexDirection: "row", gap: 10 }}>
                                 <SearchComponent placeholder="Procurar por nome" data={systems} setFilteredData={setFilteredSystems} />
-                                <SortComponent title="Ordenar" style={{ paddingHorizontal: "auto" }} />
+                                {/* <SortComponent
+                                    title="Ordenar"
+                                    style={{ paddingHorizontal: "auto" }}
+                                    data={systems}
+                                    setFilteredData={setSortedSystems}
+                                /> */}
                                 <ExpandButton onPress={onAccordionPress} expanded={expanded} />
                             </View>
                         )}
@@ -67,7 +73,7 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
                         {name !== "Admin. Master" && (
                             <View style={{ flexDirection: "row", gap: 10 }}>
                                 <SearchComponent placeholder="Procurar" data={systems} setFilteredData={setFilteredSystems} />
-                                <SortComponent title="Ordenar" style={{ paddingHorizontal: "auto" }} />
+                                {/* <SortComponent title="Ordenar" style={{ paddingHorizontal: "auto" }} /> */}
                             </View>
                         )}
                     </View>
