@@ -31,7 +31,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({ email, password 
     const [hiddenPassword, setHiddenPassword] = useState(true)
 
     const validation_schema = Yup.object().shape({
-        login: Yup.string().email("E-mail inválido").required(validationErrors.required),
+        login: Yup.string().email(validationErrors.invalidEmail).required(validationErrors.required),
         password: Yup.string().required(validationErrors.required),
     })
 
