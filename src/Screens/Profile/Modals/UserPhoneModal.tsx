@@ -29,9 +29,9 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
     const [currentPhoneError, setCurrentPhoneError] = useState(false)
 
     //todo: melhorar a validação do phone
-    const validateSchema = Yup.object().shape({
-        phone: Yup.string().min(11, validationErrors.invalidPhone).required(validationErrors.required),
-    })
+    // const validateSchema = Yup.object().shape({
+    //     phone: Yup.string().min(11, validationErrors.invalidPhone).required(validationErrors.required),
+    // })
 
     const formik = useFormik<PartialUser>({
         initialValues: { id: user!.id, phone: "" },
@@ -44,7 +44,7 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                 console.log(error)
             }
         },
-        validationSchema: validateSchema,
+        // validationSchema: validateSchema,
         validateOnChange: false,
         enableReinitialize: true,
     })
@@ -98,9 +98,9 @@ export const UserPhoneModal: React.FC<UserPhoneModalProps> = ({ visible, onDismi
                         }}
                         onChangeText={formik.handleChange("phone")}
                     />
-                    {formik.touched.phone && formik.errors.phone && (
+                    {/* {formik.touched.phone && formik.errors.phone && (
                         <Text style={{ color: colors.error, marginTop: -20 }}>{formik.errors.phone}</Text>
-                    )}
+                    )} */}
 
                     <TextInput
                         value={currentPassword}
