@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { LayoutAnimation, View, Text, Platform, Pressable } from "react-native"
 import { SystemComponentProp } from "../../types/SystemComponentProp"
 import { Button, List, Surface, useTheme } from "react-native-paper"
@@ -16,11 +16,16 @@ interface SystemWrapperProps {
 export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) => {
     const theme = useTheme()
     const [expanded, setExpanded] = useState(true)
+    const [filteredSystems, setFilteredSystems] = useState(systems)
 
     const onAccordionPress = () => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
         setExpanded((value) => !value)
     }
+
+    useEffect(() => {
+        setFilteredSystems(systems)
+    }, [systems])
 
     return (
         <Surface>
@@ -39,7 +44,7 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
                         <Text style={{ fontWeight: "bold", color: colors.grey }}>{name}</Text>
                         {name !== "Admin. Master" && (
                             <View style={{ flexDirection: "row", gap: 10 }}>
-                                <SearchComponent placeholder="Procurar por nome" />
+                                <SearchComponent placeholder="Procurar por nome" data={systems} setFilteredData={setFilteredSystems} />
                                 <SortComponent title="Ordenar" style={{ paddingHorizontal: "auto" }} />
                                 <ExpandButton onPress={onAccordionPress} expanded={expanded} />
                             </View>
@@ -61,7 +66,7 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
                         </View>
                         {name !== "Admin. Master" && (
                             <View style={{ flexDirection: "row", gap: 10 }}>
-                                <SearchComponent placeholder="Procurar" />
+                                <SearchComponent placeholder="Procurar" data={systems} setFilteredData={setFilteredSystems} />
                                 <SortComponent title="Ordenar" style={{ paddingHorizontal: "auto" }} />
                             </View>
                         )}
@@ -70,7 +75,7 @@ export const SystemWrapper: React.FC<SystemWrapperProps> = ({ name, systems }) =
             </Pressable>
             {expanded && (
                 <Surface style={{ padding: 20, gap: 10 }}>
-                    {systems.map((item) => (
+                    {filteredSystems.map((item) => (
                         <SystemContainer key={item.route} name={item.name} route={item.route} />
                     ))}
                 </Surface>
