@@ -59,7 +59,7 @@ export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route }) => {
             ]}
         >
             <View style={[{ flexDirection: "row", paddingVertical: 10, justifyContent: "space-between", alignItems: "center" }]}>
-                <View style={[{ flexDirection: "row", alignItems: "center", maxWidth: "70%" }]}>
+                <View style={[{ flexDirection: "row", alignItems: "center" }, Platform.OS === "web" ? { maxWidth: "75%" } : { maxWidth: "60%" }]}>
                     <Text variant="headlineSmall" ellipsizeMode="tail" numberOfLines={1} style={[{ fontWeight: "bold", color: colors.grey }]}>
                         {resale?.name}
                     </Text>
