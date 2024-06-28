@@ -59,11 +59,11 @@ export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route }) => {
             ]}
         >
             <View style={[{ flexDirection: "row", paddingVertical: 10, justifyContent: "space-between", alignItems: "center" }]}>
-                <View style={[{ flexDirection: "row", alignItems: "center" }]}>
-                    <Text variant="headlineSmall" style={[{ fontWeight: "bold", color: colors.grey }]}>
+                <View style={[{ flexDirection: "row", alignItems: "center", maxWidth: "70%" }]}>
+                    <Text variant="headlineSmall" ellipsizeMode="tail" numberOfLines={1} style={[{ fontWeight: "bold", color: colors.grey }]}>
                         {resale?.name}
                     </Text>
-                    <IconButton icon={"chevron-down"} onPress={() => setResaleListModalOpen(true)} />
+                    <IconButton icon={"unfold-more-horizontal"} onPress={() => setResaleListModalOpen(true)} />
                 </View>
                 <View style={[{ flexDirection: "row" }]}>
                     <IconButton icon={"poll"} style={{ margin: 0 }} />

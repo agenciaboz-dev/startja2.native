@@ -26,7 +26,7 @@ export const CustomersAccordion: React.FC<CustomersAccordionProps> = ({ resale }
                     <TextInput
                         mode="outlined"
                         dense
-                        placeholder="Procurar por nome, CPF, CNPJ e..."
+                        placeholder="Procurar por nome, CPF, CNPJ..."
                         value={searchValue}
                         onChangeText={(text) => setSearchValue(text)}
                     />
