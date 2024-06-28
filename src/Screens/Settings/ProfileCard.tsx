@@ -18,7 +18,7 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({}) => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 flexDirection: "row",
-                backgroundColor: theme.colors.background,
+                paddingVertical: 10,
             }}
         >
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>

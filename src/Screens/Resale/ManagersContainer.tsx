@@ -24,11 +24,13 @@ export const ManagersContainer: React.FC<ManagersContainerProps> = ({ managers, 
                     <ManagerFormModal visible={showManagerForm} onDismiss={() => setShowManagerForm(false)} resale={resale} onFinish={onAddManager} />
                 }
             >
-                {managers.map((item) => (
-                    <Text variant="labelLarge" key={item.id}>
-                        {item.name}
-                    </Text>
-                ))}
+                <View style={{ gap: 10 }}>
+                    {managers.map((item) => (
+                        <Text variant="labelLarge" key={item.id}>
+                            {item.name}
+                        </Text>
+                    ))}
+                </View>
             </ResaleAccordion>
         </View>
     )

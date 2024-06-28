@@ -30,20 +30,11 @@ export const CustomersAccordion: React.FC<CustomersAccordionProps> = ({ resale }
                         value={searchValue}
                         onChangeText={(text) => setSearchValue(text)}
                     />
-                    <ScrollView style={{ maxHeight: 500 }}>
-                        {/* <FlatList
-                            data={[1, 2, 3, 4, 5]}
-                            renderItem={({ item }) => <CustomerComponent />}
-                            keyExtractor={(item) => item.toString()}
-                            style={{ margin: -20 }}
-                            contentContainerStyle={[{ padding: 20, gap: 20 }]}
-                        /> */}
-                        <View style={{ gap: 20 }}>
-                            {data.map((item) => (
-                                <CustomerComponent key={item.valueOf()} />
-                            ))}
-                        </View>
-                    </ScrollView>
+                    <View style={{ gap: 20 }}>
+                        {data.map((item) => (
+                            <CustomerComponent key={item.toString()} />
+                        ))}
+                    </View>
                 </View>
             </ResaleAccordion>
         </View>

@@ -4,7 +4,7 @@ import { Platform, ScrollView, View } from "react-native"
 import { Resale } from "../../types/server/class/Resale"
 import { useResale } from "../../hooks/useResale"
 import { User } from "../../types/server/class"
-import { IconButton, Surface, Text } from "react-native-paper"
+import { Divider, IconButton, Surface, Text } from "react-native-paper"
 import { colors } from "../../style/colors"
 import { ManagersContainer } from "./ManagersContainer"
 import { CustomersAccordion } from "./CustomersAccordion"
@@ -51,23 +51,31 @@ export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route }) => {
     }, [resale_id])
 
     return (
-        <Surface style={[{ padding: 20 }, Platform.OS == "web" && { width: 350, justifyContent: "space-between" }]}>
-            <View>
-                <View style={[{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }]}>
-                    <View style={[{ flexDirection: "row", alignItems: "center" }]}>
-                        <Text variant="headlineSmall" style={[{ fontWeight: "bold", color: colors.grey }]}>
-                            {resale?.name}
-                        </Text>
-                        <IconButton icon={"chevron-down"} onPress={() => setResaleListModalOpen(true)} />
-                    </View>
-                    <View style={[{ flexDirection: "row" }]}>
-                        <IconButton icon={"poll"} style={{ margin: 0 }} />
-                        <IconButton icon={"cog"} style={{ margin: 0 }} />
-                    </View>
+        <Surface
+            style={[
+                { paddingHorizontal: 20 },
+                Platform.OS === "web" && { width: 350, justifyContent: "space-between" },
+                Platform.OS !== "web" && { flex: 1 },
+            ]}
+        >
+            <View style={[{ flexDirection: "row", paddingVertical: 10, justifyContent: "space-between", alignItems: "center" }]}>
+                <View style={[{ flexDirection: "row", alignItems: "center" }]}>
+                    <Text variant="headlineSmall" style={[{ fontWeight: "bold", color: colors.grey }]}>
+                        {resale?.name}
+                    </Text>
+                    <IconButton icon={"chevron-down"} onPress={() => setResaleListModalOpen(true)} />
                 </View>
+                <View style={[{ flexDirection: "row" }]}>
+                    <IconButton icon={"poll"} style={{ margin: 0 }} />
+                    <IconButton icon={"cog"} style={{ margin: 0 }} />
+                </View>
+            </View>
+            <Divider style={[Platform.OS !== "web" && { marginHorizontal: -20 }]} />
+            <ScrollView style={{ paddingBottom: 20 }}>
                 {resale && <ManagersContainer managers={managers} resale={resale} onAddManager={onAddManager} />}
                 {resale && <CustomersAccordion resale={resale} />}
-            </View>
+            </ScrollView>
+            <Divider style={[Platform.OS !== "web" && { marginHorizontal: -20 }]} />
             {Platform.OS === "web" && <ProfileCard />}
             <ResaleListModal visible={resaleListModalOpen} onDismiss={() => setResaleListModalOpen(false)} />
         </Surface>

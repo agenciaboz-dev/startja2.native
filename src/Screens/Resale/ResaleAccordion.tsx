@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { LayoutAnimation, View } from "react-native"
+import { LayoutAnimation, Platform, View } from "react-native"
 import { IconButton, List, Text, useTheme } from "react-native-paper"
 
 interface ResaleAccordionProps {
@@ -33,7 +33,7 @@ export const ResaleAccordion: React.FC<ResaleAccordionProps> = ({ title, onAddIc
             pointerEvents="box-none"
             right={(expanded) => <IconButton icon="plus" style={{ margin: 0 }} onPress={onAddIconPress} />}
         >
-            <View style={[{ paddingHorizontal: 30 }]}>{children}</View>
+            <View style={[{ paddingHorizontal: 30 }, Platform.OS !== "web" && expanded && { paddingBottom: 20 }]}>{children}</View>
             {modal}
         </List.Accordion>
     )
