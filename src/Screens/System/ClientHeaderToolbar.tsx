@@ -5,11 +5,22 @@ import { colors } from "../../style/colors"
 import placeholders from "../../components/Tools/placeholders"
 import { TollBarControls } from "./ToolbarControls"
 
-interface ClienteHeaderToolbarProps {}
+interface ClienteHeaderToolbarProps {
+    displayStatistics: boolean
+}
 
-export const ClienteHeaderToolbar: React.FC<ClienteHeaderToolbarProps> = ({}) => {
+export const ClienteHeaderToolbar: React.FC<ClienteHeaderToolbarProps> = ({ displayStatistics }) => {
     return (
-        <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderColor: "#ff0000", borderWidth: 1 }}>
+        <View
+            style={{
+                flex: displayStatistics ? 0.75 : 1,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+
+                maxHeight: 50,
+            }}
+        >
             <View style={[{ flexDirection: "row", alignItems: "center" }, Platform.OS === "web" ? {} : {}]}>
                 <Text variant="headlineSmall" ellipsizeMode="tail" numberOfLines={1} style={[{ fontWeight: "bold", color: colors.grey }]}>
                     [Nome do Cliente]
@@ -21,11 +32,13 @@ export const ClienteHeaderToolbar: React.FC<ClienteHeaderToolbarProps> = ({}) =>
                     <TollBarControls />
                 </View>
                 <View style={{ flexDirection: "row", gap: 10, alignItems: "center" }}>
-                    <View>
-                        <Text>[Nome do Cliente / Convidado]</Text>
-                        <Text>CPF: 000.000.000-00</Text>
-                        <Text>Cidade/UF</Text>
-                    </View>
+                    {!displayStatistics && (
+                        <View>
+                            <Text>[Nome do Cliente / Convidado]</Text>
+                            <Text>CPF: 000.000.000-00</Text>
+                            <Text>Cidade/UF</Text>
+                        </View>
+                    )}
                     <Surface style={{ borderRadius: 50 }}>
                         <Avatar.Image source={placeholders.user} />
                     </Surface>

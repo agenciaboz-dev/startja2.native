@@ -13,9 +13,11 @@ import { ProfileCard } from "../Settings/ProfileCard"
 
 interface ResaleScreenProps {
     route: RouteProp<any, any>
+    displayStatistics: boolean
+    setDisplayStatistics: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route }) => {
+export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route, displayStatistics, setDisplayStatistics }) => {
     const resale_id = route.params?.resale
     const { fetchManagers, fetchResale } = useResale()
 
@@ -66,7 +68,7 @@ export const ResaleScreen: React.FC<ResaleScreenProps> = ({ route }) => {
                     <IconButton icon={"unfold-more-horizontal"} onPress={() => setResaleListModalOpen(true)} />
                 </View>
                 <View style={[{ flexDirection: "row" }]}>
-                    <IconButton icon={"poll"} style={{ margin: 0 }} />
+                    <IconButton icon={"poll"} style={{ margin: 0 }} onPress={() => setDisplayStatistics(!displayStatistics)} />
                     <IconButton icon={"cog"} style={{ margin: 0 }} />
                 </View>
             </View>
