@@ -31,7 +31,7 @@ export const ResaleAccordion: React.FC<ResaleAccordionProps> = ({ title, onAddIc
             }
             onPress={onPress}
             pointerEvents="box-none"
-            right={(expanded) => <IconButton icon="plus" style={{ margin: 0 }} onPress={onAddIconPress} />}
+            right={() => (expanded ? <IconButton icon="plus" style={{ margin: 0 }} onPress={onAddIconPress} /> : null)}
         >
             <View style={[{ paddingHorizontal: 30 }, Platform.OS !== "web" && expanded && { paddingBottom: 20 }]}>{children}</View>
             {modal}
