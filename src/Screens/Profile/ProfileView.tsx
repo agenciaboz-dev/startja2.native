@@ -14,6 +14,8 @@ import { UserEmailModal } from "./Modals/UserEmailModal"
 import { UserPhoneModal } from "./Modals/UserPhoneModal"
 import { UserNameModal } from "./Modals/UserNameModal"
 import { SettingsModal } from "./Modals/SettingsModal"
+import { emailMask } from "../../tools/emailMask"
+import { phoneMask } from "../../tools/phoneMask"
 
 interface ProfileViewProps {}
 
@@ -61,8 +63,8 @@ export const ProfileView: React.FC<ProfileViewProps> = ({}) => {
                 </View>
                 <View style={{ padding: 20, gap: 20, backgroundColor: colors.box }}>
                     <ProfileInfoCard description="NOME DE USUÁRIO" data={user!.name} onPress={() => setOpenUserNameModal(true)} />
-                    <ProfileInfoCard description="EMAIL" data={user!.email} onPress={() => setOpenUserEmailModal(true)} />
-                    <ProfileInfoCard description="TELEFONE" data={user!.phone} onPress={() => setOpenPhoneModal(true)} />
+                    <ProfileInfoCard description="EMAIL" data={emailMask(user!.email)} onPress={() => setOpenUserEmailModal(true)} />
+                    <ProfileInfoCard description="TELEFONE" data={phoneMask(user!.phone)} onPress={() => setOpenPhoneModal(true)} />
                 </View>
             </Surface>
             <View style={{ gap: 15 }}>

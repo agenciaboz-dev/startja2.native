@@ -5,6 +5,8 @@ import { Surface } from "react-native-paper"
 import { Image } from "expo-image"
 import { UserData } from "./UserData"
 import placeholders from "../Tools/placeholders"
+import { phoneMask } from "../../tools/phoneMask"
+import { emailMask } from "../../tools/emailMask"
 
 interface UserCardProps {}
 
@@ -26,15 +28,15 @@ export const UserCard: React.FC<UserCardProps> = ({}) => {
             {Platform.OS == "web" ? (
                 <View style={{ gap: 5 }}>
                     <UserData title="NOME DE USUÁRIO" value={user.name} />
-                    <UserData title="TELEFONE" value={user.phone} />
+                    <UserData title="TELEFONE" value={phoneMask(user.phone)} />
                 </View>
             ) : (
                 <>
-                    <UserData title="E-MAIL" value={user.email} />
-                    <UserData title="TELEFONE" value={user.phone} />
+                    <UserData title="E-MAIL" value={emailMask(user.email)} />
+                    <UserData title="TELEFONE" value={phoneMask(user.phone)} />
                 </>
             )}
-            {Platform.OS == "web" && <UserData title="E-MAIL" value={user.email} style={{ marginLeft: "auto" }} />}
+            {Platform.OS == "web" && <UserData title="E-MAIL" value={emailMask(user.email)} style={{ marginLeft: "auto" }} />}
         </Surface>
     ) : null
 }
