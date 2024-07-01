@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { Platform, View } from "react-native"
 import { useUser } from "../../hooks/useUser"
 import { NotFound } from "../NotFound"
@@ -14,12 +14,13 @@ interface AdminScreenProps {
 
 export const AdminScreen: React.FC<AdminScreenProps> = ({ route }) => {
     const { user } = useUser()
+    const [displayStatistics, setDisplayStatistics] = useState(false)
 
     return user?.admin ? (
         <View style={[{ flex: 1 }, Platform.OS == "web" && { flexDirection: "row" }]}>
             <AdminSideBar />
-            <ResaleScreen route={route} />
-            <SystemScreen />
+            <ResaleScreen route={route} displayStatistics={displayStatistics} setDisplayStatistics={setDisplayStatistics} />
+            <SystemScreen displayStatistics={displayStatistics} />
         </View>
     ) : (
         <NotFound />
